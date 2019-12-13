@@ -13,5 +13,4 @@ codecov
 bump2version
 
 # Requirements of the package
-# typing-extensions
 python-dotenv

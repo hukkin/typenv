@@ -1,0 +1,23 @@
+dist: xenial
+language: python
+python:
+  - '3.6'
+  - '3.7'
+  - '3.8'
+script:
+  # Build
+  - python setup.py install
+  # Static checks (only in Python 3.6 job)
+  - |
+    if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then
+      flake8 . &&
+      mypy . &&
+      isort --check-only -rc . &&
+      black --check . &&
+      docformatter --recursive --check typenv/ tests/ setup.py
+    fi
+  # Tests
+  - pytest --cov --cov-fail-under=95
+after_success:
+  # Upload coverage (only in Python 3.6 job, to not spam codecov with the same coverage report)
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then codecov; fi
