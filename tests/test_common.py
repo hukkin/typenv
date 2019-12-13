@@ -3,36 +3,6 @@ import pytest
 from typenv import Env
 
 
-@pytest.fixture
-def env():
-    return Env()
-
-
-@pytest.fixture
-def set_env(monkeypatch):
-    def _set_env(env_map):
-        for k, v in env_map.items():
-            monkeypatch.setenv(k, v)
-
-    return _set_env
-
-
-def test_int(set_env, env):
-    set_env({"AN_INTEGER": "982"})
-    assert env.int("AN_INTEGER") == 982
-
-
-def test_int_invalid(set_env, env):
-    set_env({"AN_INTEGER": "982.1"})
-    with pytest.raises(ValueError) as exc_info:
-        env.int("AN_INTEGER")
-    assert "invalid literal for int()" in exc_info.value.args[0]
-
-
-def test_int_default(env):
-    assert env.int("THIS_IS_NOT_IN_ENV", default=12) == 12
-
-
 def test_default_to_none(env):
     assert env.int("THIS_IS_NOT_IN_ENV", default=None) is None
 
@@ -66,15 +36,5 @@ def test_upper_casing(set_env):
     assert Env(upper=True).int("aN_iNtEgEr") == 982
 
 
-def test_json(set_env, env):
-    set_env(
-        {"VALID_JSON": '{"a": "x", "b": 1.2, "c": true, "d": null, "e": [2,3], "f": {"g": 0}}'}
-    )
-    assert env.json("VALID_JSON") == {
-        "a": "x",
-        "b": 1.2,
-        "c": True,
-        "d": None,
-        "e": [2, 3],
-        "f": {"g": 0},
-    }
+# TODO: test_prefix
+# TODO: test read_env
