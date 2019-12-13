@@ -4,7 +4,19 @@ import json
 import os
 import string
 import typing
-from typing import Any, Callable, Generator, Iterable, List, Optional, Type, TypeVar, Union
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Generator,
+    Iterable,
+    List,
+    NamedTuple,
+    Optional,
+    Type,
+    TypeVar,
+    Union,
+)
 
 import dotenv
 
@@ -30,6 +42,12 @@ class _Missing:
 _DEFAULT_NAME_CHARS = string.ascii_uppercase + string.digits + "_"
 
 
+class _ParsedValue(NamedTuple):
+    value: Any
+    type: type
+    optional: bool
+
+
 class Env:
     def __init__(
         self, *, allowed_chars: Iterable[_Str] = _DEFAULT_NAME_CHARS, upper: _Bool = False,
@@ -37,7 +55,7 @@ class Env:
         self._allowed_chars = allowed_chars
         self._upper = upper
         self.prefix: List[_Str] = []
-        # self._processed = {}
+        self._parsed: Dict[str, _ParsedValue] = {}
 
     def _get_and_cast(
         self,
@@ -242,7 +260,7 @@ class Env:
     def get_env_example(self) -> _Str:
         raise NotImplementedError
 
-    def dump(self) -> _Str:
+    def dump(self) -> Dict[_Str, Any]:
         raise NotImplementedError
 
     def _preprocess_name(self, name: _Str) -> _Str:
