@@ -1,9 +1,10 @@
+import contextlib
 from decimal import Decimal as D
 import json
 import os
 import string
 import typing
-from typing import Any, Callable, Iterable, List, Optional, Type, TypeVar, Union
+from typing import Any, Callable, Generator, Iterable, List, Optional, Type, TypeVar, Union
 
 import dotenv
 
@@ -35,6 +36,7 @@ class Env:
     ):
         self._allowed_chars = allowed_chars
         self._upper = upper
+        self.prefix: List[_Str] = []
         # self._processed = {}
 
     def _get_and_cast(
@@ -211,8 +213,14 @@ class Env:
         subcasted_list_cast = get_subcasted_list_cast(subcast)
         return self._get_and_cast(name, subcasted_list_cast, default, validate)
 
-    def prefixed(self) -> None:
-        raise NotImplementedError
+    @contextlib.contextmanager
+    def prefixed(self, prefix: _Str) -> Generator[None, None, None]:
+        old_prefix = self.prefix.copy()
+        self.prefix.append(prefix)
+        try:
+            yield
+        finally:
+            self.prefix = old_prefix
 
     def __contains__(self, item: _Str) -> _Bool:
         raise NotImplementedError
@@ -238,6 +246,8 @@ class Env:
         raise NotImplementedError
 
     def _preprocess_name(self, name: _Str) -> _Str:
+        name = "".join(self.prefix) + name
+
         if self._upper:
             name = name.upper()
         self._validate_name(name)
