@@ -10,6 +10,7 @@ flake8-bugbear
 mypy
 docformatter
 codecov
+bump2version
 
 # Requirements of the package
 # typing-extensions

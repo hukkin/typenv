@@ -7,6 +7,8 @@ from typing import Any, Callable, Iterable, List, Optional, Type, TypeVar, Union
 
 import dotenv
 
+__version__ = "0.0.0"
+
 # Make aliases for these types because typecast method names shadow the names
 _Str = str
 _Int = int
