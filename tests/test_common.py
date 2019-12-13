@@ -54,5 +54,24 @@ def test_validators_single(set_env, env):
         env.int("AN_INTEGER", validate=(is_positive, is_negative))
 
 
-# TODO: test_prefix
+def test_prefix(set_env, env):
+    set_env({"PREFIX_STRING": "some string"})
+    assert env.str("PREFIX_STRING") == "some string"
+    env.prefix.append("PREFIX_")
+    assert env.str("STRING") == "some string"
+    env.prefix.pop()
+    assert env.str("PREFIX_STRING") == "some string"
+
+
+def test_prefixed(set_env, env):
+    set_env({"PF1_PF2_STRING": "some string"})
+    assert env.str("PF1_PF2_STRING") == "some string"
+    with env.prefixed("PF1_"):
+        assert env.str("PF2_STRING") == "some string"
+        with env.prefixed("PF2_"):
+            assert env.str("STRING") == "some string"
+        assert env.str("PF2_STRING") == "some string"
+    assert env.str("PF1_PF2_STRING") == "some string"
+
+
 # TODO: test read_env
