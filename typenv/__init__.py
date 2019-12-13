@@ -67,7 +67,7 @@ class Env:
     def str(self, name: _Str, *, default: None = None,) -> Optional[_Str]:
         ...
 
-    def str(  # noqa: F811
+    def str(
         self,
         name: _Str,
         *,
