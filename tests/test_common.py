@@ -74,4 +74,6 @@ def test_prefixed(set_env, env):
     assert env.str("PF1_PF2_STRING") == "some string"
 
 
-# TODO: test read_env
+def test_read_env(env):
+    env.read_env("./tests/.env.test")
+    assert env.str("A_STRING") == "blabla"
