@@ -36,5 +36,23 @@ def test_upper_casing(set_env):
     assert Env(upper=True).int("aN_iNtEgEr") == 982
 
 
+def test_validators_single(set_env, env):
+    def is_positive(val):
+        return val > 0
+
+    def is_negative(val):
+        return val < 0
+
+    set_env({"AN_INTEGER": "982"})
+
+    assert env.int("AN_INTEGER", validate=is_positive) == 982
+    assert env.int("AN_INTEGER", validate=(is_positive, is_positive)) == 982
+
+    with pytest.raises(Exception):
+        env.int("AN_INTEGER", validate=is_negative)
+    with pytest.raises(Exception):
+        env.int("AN_INTEGER", validate=(is_positive, is_negative))
+
+
 # TODO: test_prefix
 # TODO: test read_env
