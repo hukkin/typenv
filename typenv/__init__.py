@@ -8,7 +8,7 @@ from typing import Any, Callable, Generator, Iterable, List, Optional, Type, Typ
 
 import dotenv
 
-__version__ = "0.0.2"
+__version__ = "0.0.2"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
 # Make aliases for these types because typecast method names shadow the names
 _Str = str

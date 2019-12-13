@@ -27,12 +27,12 @@ setup(
     python_requires=">=3.6",
     keywords="todo-keyword todo-another-keyword",
     classifiers=[
-        "Typing :: Typed",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "Typing :: Typed",
     ],
 )
