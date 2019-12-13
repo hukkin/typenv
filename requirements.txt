@@ -1,0 +1,16 @@
+# Tests and CI
+isort
+pre-commit
+pytest
+pytest-cov
+pytest-mock
+black
+flake8
+flake8-bugbear
+mypy
+docformatter
+codecov
+
+# Requirements of the package
+# typing-extensions
+python-dotenv
