@@ -42,10 +42,34 @@ class _Missing:
 _DEFAULT_NAME_CHARS = string.ascii_uppercase + string.digits + "_"
 
 
-class _ParsedValue(NamedTuple):
+class ParsedValue(NamedTuple):
     value: Any
-    type: type
+    type: str
     optional: bool
+
+
+def _cast_bool(value: _Str) -> _Bool:
+    if value.lower() in {"true", "1"}:
+        return True
+    if value.lower() in {"false", "0"}:
+        return False
+    raise Exception("Failed to cast to bool")
+
+
+def _cast_list(value: _Str, subcast: Callable = _Str) -> List:
+    return [subcast(item) for item in value.split(",")]
+
+
+# Functions that cast a string to a type
+_typecast_map: Dict[str, Callable] = {
+    "bool": _cast_bool,
+    "decimal": D,
+    "float": float,
+    "int": int,
+    "json": json.loads,
+    "list": _cast_list,
+    "str": str,
+}
 
 
 class Env:
@@ -55,15 +79,22 @@ class Env:
         self._allowed_chars = allowed_chars
         self._upper = upper
         self.prefix: List[_Str] = []
-        self._parsed: Dict[str, _ParsedValue] = {}
+        self._parsed: Dict[str, ParsedValue] = {}
 
     def _get_and_cast(
         self,
         name: _Str,
-        typecast: Callable[..., _T],
+        cast_type: _Str,
         default: Union[Type[_Missing], None, _T],
         validate: Union[Callable, Iterable[Callable]],
+        *,
+        typecast_kwds: Dict[str, Any] = None,
     ) -> Optional[_T]:
+        if typecast_kwds is None:
+            typecast_kwds = {}
+
+        is_optional = default is not _Missing
+
         name = self._preprocess_name(name)
 
         value = os.environ.get(name, default)
@@ -73,13 +104,18 @@ class Env:
         assert not isinstance(value, type), "Value cant be any other type besides _Missing"
 
         if value is None:
-            return None
+            self._parsed[name] = ParsedValue(value, cast_type, is_optional)
+            return value
 
         if isinstance(value, _Str):
-            value = typecast(value)
+            value = _typecast_map[cast_type](value, **typecast_kwds)
 
         self._validate(value, validate)
-        return value
+
+        self._parsed[name] = ParsedValue(value, cast_type, is_optional)
+        # Ignore type checker. The typecast that assigns Any to `value` makes it
+        # very hard to prove that `value` is of type `_T`.
+        return value  # type: ignore
 
     @typing.overload
     def str(self, name: _Str, *, default: Union[Type[_Missing], _Str] = _Missing,) -> _Str:
@@ -96,7 +132,7 @@ class Env:
         default: Union[Type[_Missing], None, _Str] = _Missing,
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Optional[_Str]:
-        return self._get_and_cast(name, str, default, validate)
+        return self._get_and_cast(name, "str", default, validate)
 
     @typing.overload
     def int(self, name: _Str, *, default: Union[Type[_Missing], _Int] = _Missing) -> _Int:
@@ -113,7 +149,7 @@ class Env:
         default: Union[Type[_Missing], None, _Int] = _Missing,
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Optional[_Int]:
-        return self._get_and_cast(name, int, default, validate)
+        return self._get_and_cast(name, "int", default, validate)
 
     @typing.overload
     def bool(self, name: _Str, *, default: Union[Type[_Missing], _Bool] = _Missing) -> _Bool:
@@ -130,15 +166,7 @@ class Env:
         default: Union[Type[_Missing], None, _Bool] = _Missing,
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Optional[_Bool]:
-        return self._get_and_cast(name, self._cast_bool, default, validate)
-
-    @staticmethod
-    def _cast_bool(value: _Str) -> _Bool:
-        if value.lower() in {"true", "1"}:
-            return True
-        if value.lower() in {"false", "0"}:
-            return False
-        raise Exception("Failed to cast to bool")
+        return self._get_and_cast(name, "bool", default, validate)
 
     @typing.overload
     def float(self, name: _Str, *, default: Union[Type[_Missing], _Float] = _Missing) -> _Float:
@@ -155,7 +183,7 @@ class Env:
         default: Union[Type[_Missing], None, _Float] = _Missing,
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Optional[_Float]:
-        return self._get_and_cast(name, float, default, validate)
+        return self._get_and_cast(name, "float", default, validate)
 
     @typing.overload
     def decimal(self, name: _Str, *, default: Union[Type[_Missing], D] = _Missing) -> D:
@@ -172,7 +200,7 @@ class Env:
         default: Union[Type[_Missing], None, D] = _Missing,
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Optional[D]:
-        return self._get_and_cast(name, D, default, validate)
+        return self._get_and_cast(name, "decimal", default, validate)
 
     def json(
         self,
@@ -181,7 +209,7 @@ class Env:
         default: Union[Type[_Missing], None, _JSONType] = _Missing,
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Any:
-        value = self._get_and_cast(name, json.loads, default, validate)
+        value = self._get_and_cast(name, "json", default, validate)
         # Extra validation: make sure user provided default serializes to json
         json.dumps(value)
         return value
@@ -220,16 +248,10 @@ class Env:
         validate: Union[Callable, Iterable[Callable]] = (),
         subcast: Callable = _Str,
     ) -> Optional[List]:
-        def get_subcasted_list_cast(subcast: Callable[..., _T]) -> Callable[..., List[_T]]:
-            def cast_list(value: str) -> List[_T]:
-                return [subcast(item) for item in value.split(",")]
-
-            return cast_list
-
-        if subcast is bool:
-            subcast = self._cast_bool
-        subcasted_list_cast = get_subcasted_list_cast(subcast)
-        return self._get_and_cast(name, subcasted_list_cast, default, validate)
+        subcast_func = _typecast_map[subcast.__name__.lower()]
+        return self._get_and_cast(
+            name, "list", default, validate, typecast_kwds={"subcast": subcast_func}
+        )
 
     @contextlib.contextmanager
     def prefixed(self, prefix: _Str) -> Generator[None, None, None]:
@@ -257,11 +279,17 @@ class Env:
         dotenv.load_dotenv(path, override=override)
         return True
 
-    def get_env_example(self) -> _Str:
-        raise NotImplementedError
+    def get_example(self) -> _Str:
+        env_example = ""
+        for k, v in sorted(self.dump().items()):
+            value_example = v.type
+            if v.optional:
+                value_example = f"Optional[{value_example}]"
+            env_example += f"{k}={value_example}\n"
+        return env_example
 
-    def dump(self) -> Dict[_Str, Any]:
-        raise NotImplementedError
+    def dump(self) -> Dict[_Str, ParsedValue]:
+        return self._parsed
 
     def _preprocess_name(self, name: _Str) -> _Str:
         name = "".join(self.prefix) + name
