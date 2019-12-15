@@ -57,8 +57,6 @@ def _cast_bool(value: _Str) -> _Bool:
 
 
 def _cast_list(value: _Str, subcast: Callable = _Str) -> List:
-    if not value:
-        return []
     return [subcast(item) for item in value.split(",")]
 
 
