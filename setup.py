@@ -12,7 +12,7 @@ def read(file_name: str) -> str:
 
 setup(
     name="typenv",
-    version="0.0.2",  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+    version="0.0.3",  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
     author="hukkinj1",
     author_email="hukkinj1@users.noreply.github.com",
     description="TODO:",
