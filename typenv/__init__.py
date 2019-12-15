@@ -215,9 +215,7 @@ class Env:
         return value
 
     @typing.overload
-    def list(
-        self, name: _Str, *, default: Union[Type[_Missing], List[_T]] = _Missing
-    ) -> List[_Str]:
+    def list(self, name: _Str, *, default: Union[Type[_Missing], List] = _Missing) -> List[_Str]:
         ...
 
     @typing.overload
