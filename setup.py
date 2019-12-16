@@ -15,7 +15,7 @@ setup(
     version="0.0.3",  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
     author="hukkinj1",
     author_email="hukkinj1@users.noreply.github.com",
-    description="TODO:",
+    description="Typed environment variable parsing for Python",
     url="https://github.com/hukkinj1/typenv",
     project_urls={"Changelog": "https://github.com/hukkinj1/typenv/blob/master/CHANGELOG.md"},
     packages=["typenv"],
@@ -25,7 +25,7 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=["python-dotenv>=0.10.3,<0.11.0"],
     python_requires=">=3.6",
-    keywords="todo-keyword todo-another-keyword",
+    keywords="environment variables typed configuration",
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3 :: Only",

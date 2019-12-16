@@ -7,7 +7,16 @@
 <!--- Don't edit the version line below manually. Let bump2version do it for you. -->
 > Version 0.0.3
 
-> TODO: add a brief description here
+> Typed environment variable parsing for Python
+
+## Background
+Typenv does environment variable parsing with an API almost identical to the excellent [environs](https://github.com/sloria/environs). There are a few reasons why typenv might be preferred:
+- Type annotated typecast functions. Type checkers are able to understand types of parsed environment variables.
+- More flexible prefix manipulation for environment variable names.
+- Validation of environment variable names.
+- Optional automatic uppercasing of environment variable names.
+- Ability to generate a .env.example that shows expected types of environment variables.
+- Less dependencies. No [marshmallow](https://github.com/marshmallow-code/marshmallow) required.
 
 ## Installing
 Installing from PyPI repository (https://pypi.org/project/typenv):
@@ -16,7 +25,9 @@ pip install typenv
 ```
 
 ## Usage
-TODO: add something here
+See [environs README.md](https://github.com/sloria/environs/blob/master/README.md) for now, as the API of typenv is mostly just a subset of environs'.
+
+TODO: Add a more accurate API documentation / usage guide here.
 
 ## Acknowledgments
 The public API of this library is almost an exact copy of [environs](https://github.com/sloria/environs), which is based on [envparse](https://github.com/rconradharris/envparse) and [django-environ](https://github.com/joke2k/django-environ). Credit for the interface goes to the authors of those libraries.
