@@ -33,9 +33,9 @@ _JSONType = Union[None, bool, int, float, str, list, dict]
 
 
 class _Missing:
-    """A type used as a unique object used to signal missing env variable.
+    """A type used as a unique object to signal a missing env variable.
 
-    Should not be instantiated
+    Should not be instantiated.
     """
 
 
@@ -101,7 +101,6 @@ class Env:
 
         if value is _Missing:
             raise Exception("Mandatory environment variable is missing")
-        assert not isinstance(value, type), "Value cant be any other type besides _Missing"
 
         if value is None:
             self._parsed[name] = ParsedValue(value, cast_type, is_optional)
@@ -113,8 +112,8 @@ class Env:
         self._validate(value, validate)
 
         self._parsed[name] = ParsedValue(value, cast_type, is_optional)
-        # Ignore type checker. The typecast that assigns Any to `value` makes it
-        # very hard to prove that `value` is of type `_T`.
+        # Ignore type checker. The typecast above assigns a value of `Any` type
+        # to `value` making it very hard to prove that `value` is of type `_T`.
         return value  # type: ignore
 
     @typing.overload
@@ -259,9 +258,6 @@ class Env:
             yield
         finally:
             self.prefix = old_prefix
-
-    def __contains__(self, item: _Str) -> _Bool:
-        raise NotImplementedError
 
     @staticmethod
     def read_env(path: _Str = ".env", override: _Bool = False) -> _Bool:

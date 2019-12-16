@@ -27,7 +27,9 @@ setup(
     python_requires=">=3.6",
     keywords="environment variables typed configuration",
     classifiers=[
+        "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",

@@ -11,7 +11,7 @@
 
 ## Background
 Typenv does environment variable parsing with an API almost identical to the excellent [environs](https://github.com/sloria/environs). There are a few reasons why typenv might be preferred:
-- Type annotated typecast functions. Type checkers are able to understand types of parsed environment variables.
+- Type annotated typecast functions: type checkers are able to understand types of parsed environment variables.
 - More flexible prefix manipulation of environment variable names.
 - Validation of environment variable names.
 - Optional automatic uppercasing of environment variable names.
