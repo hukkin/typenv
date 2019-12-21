@@ -245,6 +245,7 @@ class Env:
         validate: Union[Callable, Iterable[Callable]] = (),
         subcast: Callable = _Str,
     ) -> Optional[List]:
+        # Do lower() so that "Decimal" converts to "decimal"
         subcast_func = _typecast_map[subcast.__name__.lower()]
         return self._get_and_cast(
             name, "list", default, validate, typecast_kwds={"subcast": subcast_func}
@@ -261,10 +262,12 @@ class Env:
 
     @staticmethod
     def read_env(path: _Str = ".env", override: _Bool = False) -> _Bool:
-        """If path is a file, load it to ENV.
+        """Load environment variables from a file.
 
-        If not, recursively walk up in dir tree and look for a file with
-        that name, starting from CWD
+        If path is a file, load it to ENV. If not, recursively walk up
+        in dir tree and look for a file with that name, starting from
+        current working directory. Return a bool representing whether a
+        file was found.
         """
         if not os.path.isfile(path):
             path = dotenv.find_dotenv(path, usecwd=True)
