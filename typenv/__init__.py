@@ -53,7 +53,7 @@ def _cast_bool(value: _Str) -> _Bool:
         return True
     if value.lower() in {"false", "0"}:
         return False
-    raise Exception("Failed to cast to bool")
+    raise Exception(f'Failed to cast value "{value}" to bool')
 
 
 def _cast_list(value: _Str, subcast: Callable = _Str) -> List:
@@ -304,8 +304,8 @@ class Env:
 
     def _validate_name(self, name: _Str) -> None:
         if not name:
-            raise Exception("Environment variable name can't be empty string")
+            raise ValueError("Environment variable name can't be empty string")
         if not all(c in self._allowed_chars for c in name):
-            raise Exception("Environment variable name contains invalid character(s)")
+            raise ValueError("Environment variable name contains invalid character(s)")
         if name[0].isdigit():
-            raise Exception("Environment variable name can't start with a number")
+            raise ValueError("Environment variable name can't start with a number")

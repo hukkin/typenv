@@ -21,4 +21,4 @@ def test_bool_invalid(set_env, env):
     set_env({"NON_BOOL": "notbool"})
     with pytest.raises(Exception) as exc_info:
         env.bool("NON_BOOL")
-    assert "Failed to cast to bool" in exc_info.value.args[0]
+    assert "Failed to cast value" in exc_info.value.args[0]

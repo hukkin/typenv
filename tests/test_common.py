@@ -16,19 +16,19 @@ def test_missing(env):
 
 
 def test_empty_str_name(env):
-    with pytest.raises(Exception) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         env.int("")
     assert "Environment variable name can't be empty string" in exc_info.value.args[0]
 
 
 def test_invalid_char_in_name(env):
-    with pytest.raises(Exception) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         env.int("HERES_AN_INVALID_CHAR_=")
     assert "Environment variable name contains invalid character(s)" in exc_info.value.args[0]
 
 
 def test_name_starts_with_number(env):
-    with pytest.raises(Exception) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         env.int("7HIS_STARTS_WITH_NUMBER")
     assert "Environment variable name can't start with a number" in exc_info.value.args[0]
 
