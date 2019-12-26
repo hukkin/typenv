@@ -245,6 +245,7 @@ class Env:
         validate: Union[Callable, Iterable[Callable]] = (),
         subcast: Callable = _Str,
     ) -> Optional[List]:
+        assert subcast in {_Str, _Int, _Bool, _Float, D}
         # Do lower() so that "Decimal" converts to "decimal"
         subcast_func = _typecast_map[subcast.__name__.lower()]
         return self._get_and_cast(
