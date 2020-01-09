@@ -47,7 +47,7 @@ The public API of this library is almost an exact copy of [environs](https://git
 
 1. Install dependencies (you'll probably want to create a virtual environment, using your preferred method, first).
     ```bash
-    pip install -r requirements.txt
+    pip install -e .[dev]
     ```
 
 1. Install pre-commit hooks

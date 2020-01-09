@@ -2,6 +2,13 @@ from os import path
 
 from setuptools import setup
 
+EXTRAS_REQUIRE = {
+    "tests": ["pytest", "pytest-cov", "pytest-mock"],
+    "lint": ["isort", "black", "flake8", "flake8-bugbear", "mypy", "docformatter", "pre-commit"],
+    "tools": ["codecov", "bump2version"],
+}
+EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["lint"] + EXTRAS_REQUIRE["tools"]
+
 
 def read(file_name: str) -> str:
     """Helper to read README."""
@@ -24,6 +31,7 @@ setup(
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     install_requires=["python-dotenv>=0.10.3,<0.11.0"],
+    extras_require=EXTRAS_REQUIRE,
     python_requires=">=3.6",
     keywords="environment variables typed configuration",
     classifiers=[
