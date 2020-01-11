@@ -41,23 +41,3 @@ TODO: Add a more comprehensive API documentation / usage guide here.
 
 ## Acknowledgments
 The public API of this library is almost an exact copy of [environs](https://github.com/sloria/environs), which is based on [envparse](https://github.com/rconradharris/envparse) and [django-environ](https://github.com/joke2k/django-environ). Credit for the interface goes to the authors of those libraries.
-
-## Contributing
-1. Fork/clone the repository.
-
-1. Install dependencies (you'll probably want to create a virtual environment, using your preferred method, first).
-    ```bash
-    pip install -e .[dev]
-    ```
-
-1. Install pre-commit hooks
-    ```bash
-    pre-commit install
-    ```
-
-1. After making changes and having written tests, make sure tests pass:
-    ```bash
-    pytest
-    ```
-
-1. Commit, push, and make a PR.
