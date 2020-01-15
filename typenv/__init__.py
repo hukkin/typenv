@@ -20,7 +20,7 @@ from typing import (
 
 import dotenv
 
-__version__ = "0.0.3"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+__version__ = "0.0.4"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
 # Make aliases for these types because typecast method names shadow the names
 _Str = str
