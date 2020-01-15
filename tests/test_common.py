@@ -12,7 +12,7 @@ def test_default_to_none(env):
 def test_missing(env):
     with pytest.raises(Exception) as exc_info:
         env.int("THIS_IS_NOT_IN_ENV")
-    assert "Mandatory environment variable is missing" in exc_info.value.args[0]
+    assert '"THIS_IS_NOT_IN_ENV" is missing' in exc_info.value.args[0]
 
 
 def test_empty_str_name(env):

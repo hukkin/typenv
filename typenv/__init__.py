@@ -100,7 +100,7 @@ class Env:
         value = os.environ.get(name, default)
 
         if value is _Missing:
-            raise Exception("Mandatory environment variable is missing")
+            raise Exception(f'Mandatory environment variable "{name}" is missing')
 
         if value is None:
             self._parsed[name] = ParsedValue(value, cast_type, is_optional)
