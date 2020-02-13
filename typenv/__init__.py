@@ -11,6 +11,7 @@ from typing import (
     Generator,
     Iterable,
     List,
+    Mapping,
     NamedTuple,
     Optional,
     Type,
@@ -88,7 +89,7 @@ class Env:
         default: Union[Type[_Missing], None, _T],
         validate: Union[Callable, Iterable[Callable]],
         *,
-        typecast_kwds: Dict[str, Any] = None,
+        typecast_kwds: Mapping[str, Any] = None,
     ) -> Optional[_T]:
         if typecast_kwds is None:
             typecast_kwds = {}
