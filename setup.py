@@ -30,7 +30,7 @@ setup(
     zip_safe=False,  # For mypy to be able to find the installed package
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
-    install_requires=["python-dotenv>=0.10.3,<0.11.0"],
+    install_requires=["python-dotenv>=0.10.3,<0.12.0"],
     extras_require=EXTRAS_REQUIRE,
     python_requires=">=3.6",
     keywords="environment variables typed configuration",
