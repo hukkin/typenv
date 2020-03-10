@@ -62,7 +62,7 @@ def _cast_list(value: _Str, subcast: Callable = _Str) -> List:
 
 
 # Functions that cast a string to a type
-_typecast_map: Dict[str, Callable] = {
+_typecast_map: Mapping[str, Callable] = {
     "bool": _cast_bool,
     "decimal": D,
     "float": float,
