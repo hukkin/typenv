@@ -310,7 +310,7 @@ class Env:
     def _validate_name(self, name: _Str) -> None:
         if not name:
             raise ValueError("Environment variable name can't be empty string")
-        if not all(c in self._allowed_chars for c in name):
+        if any(c not in self._allowed_chars for c in name):
             raise ValueError("Environment variable name contains invalid character(s)")
         if name[0].isdigit():
             raise ValueError("Environment variable name can't start with a number")
