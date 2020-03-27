@@ -100,20 +100,19 @@ class Env:
 
         name = self._preprocess_name(name)
 
-        value = os.environ.get(name, default)
-
-        if value is _Missing:
-            raise Exception(f'Mandatory environment variable "{name}" is missing')
-
-        if value is None:
-            self._parsed[name] = ParsedValue(value, cast_type, is_optional)
-            return value
-
-        if isinstance(value, _Str):
-            value = _typecast_map[cast_type](value, **typecast_kwds)
+        try:
+            uncast_value = os.environ[name]
+        except KeyError:
+            if default is _Missing:
+                raise Exception(f'Mandatory environment variable "{name}" is missing')
+            if default is None:
+                self._parsed[name] = ParsedValue(None, cast_type, is_optional)
+                return None
+            value = default
+        else:
+            value = _typecast_map[cast_type](uncast_value, **typecast_kwds)
 
         self._validate(value, validate)
-
         self._parsed[name] = ParsedValue(value, cast_type, is_optional)
         # Ignore type checker. The typecast above assigns a value of `Any` type
         # to `value` making it very hard to prove that `value` is of type `_T`.
