@@ -119,11 +119,19 @@ class Env:
         return value  # type: ignore
 
     @typing.overload
-    def str(self, name: _Str, *, default: Union[Type[_Missing], _Str] = _Missing,) -> _Str:
+    def str(
+        self,
+        name: _Str,
+        *,
+        default: Union[Type[_Missing], _Str] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> _Str:
         ...
 
     @typing.overload
-    def str(self, name: _Str, *, default: None = None,) -> Optional[_Str]:
+    def str(
+        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
+    ) -> Optional[_Str]:
         ...
 
     def str(
@@ -136,11 +144,19 @@ class Env:
         return self._get_and_cast(name, "str", default, validate)
 
     @typing.overload
-    def int(self, name: _Str, *, default: Union[Type[_Missing], _Int] = _Missing) -> _Int:
+    def int(
+        self,
+        name: _Str,
+        *,
+        default: Union[Type[_Missing], _Int] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> _Int:
         ...
 
     @typing.overload
-    def int(self, name: _Str, *, default: None = None,) -> Optional[_Int]:
+    def int(
+        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
+    ) -> Optional[_Int]:
         ...
 
     def int(
@@ -153,11 +169,19 @@ class Env:
         return self._get_and_cast(name, "int", default, validate)
 
     @typing.overload
-    def bool(self, name: _Str, *, default: Union[Type[_Missing], _Bool] = _Missing) -> _Bool:
+    def bool(
+        self,
+        name: _Str,
+        *,
+        default: Union[Type[_Missing], _Bool] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> _Bool:
         ...
 
     @typing.overload
-    def bool(self, name: _Str, *, default: None = None,) -> Optional[_Bool]:
+    def bool(
+        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
+    ) -> Optional[_Bool]:
         ...
 
     def bool(
@@ -170,11 +194,19 @@ class Env:
         return self._get_and_cast(name, "bool", default, validate)
 
     @typing.overload
-    def float(self, name: _Str, *, default: Union[Type[_Missing], _Float] = _Missing) -> _Float:
+    def float(
+        self,
+        name: _Str,
+        *,
+        default: Union[Type[_Missing], _Float] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> _Float:
         ...
 
     @typing.overload
-    def float(self, name: _Str, *, default: None = None,) -> Optional[_Float]:
+    def float(
+        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
+    ) -> Optional[_Float]:
         ...
 
     def float(
@@ -187,11 +219,19 @@ class Env:
         return self._get_and_cast(name, "float", default, validate)
 
     @typing.overload
-    def decimal(self, name: _Str, *, default: Union[Type[_Missing], D] = _Missing) -> D:
+    def decimal(
+        self,
+        name: _Str,
+        *,
+        default: Union[Type[_Missing], D] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> D:
         ...
 
     @typing.overload
-    def decimal(self, name: _Str, *, default: None = None,) -> Optional[D]:
+    def decimal(
+        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
+    ) -> Optional[D]:
         ...
 
     def decimal(
@@ -216,11 +256,19 @@ class Env:
         return value
 
     @typing.overload
-    def list(self, name: _Str, *, default: Union[Type[_Missing], List] = _Missing) -> List[_Str]:
+    def list(
+        self,
+        name: _Str,
+        *,
+        default: Union[Type[_Missing], List] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> List[_Str]:
         ...
 
     @typing.overload
-    def list(self, name: _Str, *, default: None = None) -> Optional[List[_Str]]:
+    def list(
+        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
+    ) -> Optional[List[_Str]]:
         ...
 
     @typing.overload
@@ -229,13 +277,19 @@ class Env:
         name: _Str,
         *,
         default: Union[Type[_Missing], List[_T]] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
         subcast: Callable[..., _T],
     ) -> List[_T]:
         ...
 
     @typing.overload
     def list(
-        self, name: _Str, *, default: None = None, subcast: Callable[..., _T]
+        self,
+        name: _Str,
+        *,
+        default: None,
+        validate: Union[Callable, Iterable[Callable]] = (),
+        subcast: Callable[..., _T],
     ) -> Optional[List[_T]]:
         ...
 

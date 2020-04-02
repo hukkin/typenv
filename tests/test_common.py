@@ -5,29 +5,29 @@ import pytest
 from typenv import Env, ParsedValue
 
 
-def test_default_to_none(env):
+def test_default_to_none(env: Env):
     assert env.int("THIS_IS_NOT_IN_ENV", default=None) is None
 
 
-def test_missing(env):
+def test_missing(env: Env):
     with pytest.raises(Exception) as exc_info:
         env.int("THIS_IS_NOT_IN_ENV")
     assert '"THIS_IS_NOT_IN_ENV" is missing' in exc_info.value.args[0]
 
 
-def test_empty_str_name(env):
+def test_empty_str_name(env: Env):
     with pytest.raises(ValueError) as exc_info:
         env.int("")
     assert "Environment variable name can't be empty string" in exc_info.value.args[0]
 
 
-def test_invalid_char_in_name(env):
+def test_invalid_char_in_name(env: Env):
     with pytest.raises(ValueError) as exc_info:
         env.int("HERES_AN_INVALID_CHAR_=")
     assert "Environment variable name contains invalid character(s)" in exc_info.value.args[0]
 
 
-def test_name_starts_with_number(env):
+def test_name_starts_with_number(env: Env):
     with pytest.raises(ValueError) as exc_info:
         env.int("7HIS_STARTS_WITH_NUMBER")
     assert "Environment variable name can't start with a number" in exc_info.value.args[0]
@@ -38,7 +38,7 @@ def test_upper_casing(set_env):
     assert Env(upper=True).int("aN_iNtEgEr") == 982
 
 
-def test_validators_single(set_env, env):
+def test_validators_single(set_env, env: Env):
     def is_positive(val):
         return val > 0
 
@@ -56,7 +56,7 @@ def test_validators_single(set_env, env):
         env.int("AN_INTEGER", validate=(is_positive, is_negative))
 
 
-def test_prefix(set_env, env):
+def test_prefix(set_env, env: Env):
     set_env({"PREFIX_STRING": "some string"})
     assert env.str("PREFIX_STRING") == "some string"
     env.prefix.append("PREFIX_")
@@ -65,7 +65,7 @@ def test_prefix(set_env, env):
     assert env.str("PREFIX_STRING") == "some string"
 
 
-def test_prefixed(set_env, env):
+def test_prefixed(set_env, env: Env):
     set_env({"PF1_PF2_STRING": "some string"})
     assert env.str("PF1_PF2_STRING") == "some string"
     with env.prefixed("PF1_"):
@@ -76,12 +76,12 @@ def test_prefixed(set_env, env):
     assert env.str("PF1_PF2_STRING") == "some string"
 
 
-def test_read_env(env):
+def test_read_env(env: Env):
     env.read_env("./tests/.env.test")
     assert env.str("A_STRING") == "blabla"
 
 
-def test_dump_and_get_example(set_env, env):
+def test_dump_and_get_example(set_env, env: Env):
     set_env(
         {
             "VAR_1": "some string",
