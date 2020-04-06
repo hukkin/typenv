@@ -25,8 +25,38 @@ pip install typenv
 ```
 
 ## Usage
-See [environs README.md](https://github.com/sloria/environs/blob/master/README.md) for now, as the API of typenv is mostly just a subset of environs'.
 
+### Basics
+Set environment variables:
+```bash
+export NAME='Harry Potter'
+export AGE=14
+export IS_WIZARD=true
+export PATRONUM_SUCCESS_RATE=0.92
+export BANK_BALANCE=134599.01
+export LUCKY_NUMBERS=7,3,11
+export EXTRA_DETAILS='{"friends": ["Hermione", "Ron"]}'
+```
+
+Parse the values in Python:
+```python
+from typenv import Env
+
+env = Env()
+
+NAME = env.str("NAME")  # => "Harry Potter"
+AGE = env.int("AGE")  # => 14
+IS_WIZARD = env.bool("IS_WIZARD")  # => True
+PATRONUM_SUCCESS_RATE = env.float("PATRONUM_SUCCESS_RATE")  # => 0.92
+BANK_BALANCE = env.decimal("BANK_BALANCE")  # => decimal.Decimal("134599.01")
+LUCKY_NUMBERS = env.list("LUCKY_NUMBERS", subcast=int)  # => [7, 3, 11]
+EXTRA_DETAILS = env.json("EXTRA_DETAILS")  # => {"friends": ["Hermione", "Ron"]}
+
+# Optional settings must have a default value
+IS_DEATH_EATER = env.bool("IS_DEATH_EATER", default=False)  # => False
+```
+
+### Supported types
 The types supported by typenv are:
 * `env.str`
 * `env.int`
@@ -37,7 +67,23 @@ The types supported by typenv are:
 * `env.list`
     * Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
 
-TODO: Add a more comprehensive API documentation / usage guide here.
+### Default values
+TODO:
+
+### Name prefixes
+TODO:
+
+### Name uppercasing
+TODO:
+
+### Validation
+TODO:
+
+### Reading from a `.env` file
+TODO:
+
+### Dumping parsed values
+TODO:
 
 ## Acknowledgments
 The public API of this library is almost an exact copy of [environs](https://github.com/sloria/environs), which is based on [envparse](https://github.com/rconradharris/envparse) and [django-environ](https://github.com/joke2k/django-environ). Credit for the interface goes to the authors of those libraries.
