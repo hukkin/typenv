@@ -18,19 +18,23 @@ def test_missing(env: Env):
 def test_empty_str_name(env: Env):
     with pytest.raises(ValueError) as exc_info:
         env.int("")
-    assert "Environment variable name can't be empty string" in exc_info.value.args[0]
+    assert "Environment variable name can not be an empty string" in exc_info.value.args[0]
 
 
 def test_invalid_char_in_name(env: Env):
     with pytest.raises(ValueError) as exc_info:
         env.int("HERES_AN_INVALID_CHAR_=")
-    assert "Environment variable name contains invalid character(s)" in exc_info.value.args[0]
+    err_msg = exc_info.value.args[0]
+    assert "Environment variable name contains invalid character(s)" in err_msg
+    assert "HERES_AN_INVALID_CHAR_=" in err_msg
 
 
 def test_name_starts_with_number(env: Env):
     with pytest.raises(ValueError) as exc_info:
         env.int("7HIS_STARTS_WITH_NUMBER")
-    assert "Environment variable name can't start with a number" in exc_info.value.args[0]
+    err_msg = exc_info.value.args[0]
+    assert "Environment variable name can not start with a number" in err_msg
+    assert "7HIS_STARTS_WITH_NUMBER" in err_msg
 
 
 def test_upper_casing(set_env):

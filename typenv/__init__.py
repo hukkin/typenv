@@ -112,7 +112,7 @@ class Env:
         else:
             value = _typecast_map[cast_type](uncast_value, **typecast_kwds)
 
-        self._validate(value, validate)
+        self._validate(name, value, validate)
         self._parsed[name] = ParsedValue(value, cast_type, is_optional)
         # Ignore type checker. The typecast above assigns a value of `Any` type
         # to `value` making it very hard to prove that `value` is of type `_T`.
@@ -354,18 +354,26 @@ class Env:
         return name
 
     @staticmethod
-    def _validate(value: Any, validators: Union[Callable, Iterable[Callable]]) -> None:
+    def _validate(name: _Str, value: Any, validators: Union[Callable, Iterable[Callable]]) -> None:
         if callable(validators):
             validators = (validators,)
         for validator in validators:
             validator_result = validator(value)
             if validator_result is False:
-                raise Exception("A value did not pass custom validation")
+                raise Exception(
+                    f'Invalid value for "{name}": A value did not pass custom validation'
+                )
 
     def _validate_name(self, name: _Str) -> None:
         if not name:
-            raise ValueError("Environment variable name can't be empty string")
+            raise ValueError(
+                f'Invalid name "{name}": Environment variable name can not be an empty string'
+            )
         if any(c not in self._allowed_chars for c in name):
-            raise ValueError("Environment variable name contains invalid character(s)")
+            raise ValueError(
+                f'Invalid name "{name}": Environment variable name contains invalid character(s)'
+            )
         if name[0].isdigit():
-            raise ValueError("Environment variable name can't start with a number")
+            raise ValueError(
+                f'Invalid name "{name}": Environment variable name can not start with a number'
+            )
