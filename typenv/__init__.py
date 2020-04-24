@@ -110,7 +110,12 @@ class Env:
                 return None
             value = default
         else:
-            value = _typecast_map[cast_type](uncast_value, **typecast_kwds)
+            try:
+                value = _typecast_map[cast_type](uncast_value, **typecast_kwds)
+            except Exception as e:
+                raise Exception(
+                    f'Failed to cast "{uncast_value}" (variable name "{name}") to {cast_type}'
+                ) from e
 
         self._validate(name, value, validate)
         self._parsed[name] = ParsedValue(value, cast_type, is_optional)

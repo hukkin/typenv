@@ -8,9 +8,13 @@ def test_int(set_env, env):
 
 def test_int_invalid(set_env, env):
     set_env({"AN_INTEGER": "982.1"})
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(Exception) as exc_info:
         env.int("AN_INTEGER")
-    assert "invalid literal for int()" in exc_info.value.args[0]
+    err_msg = exc_info.value.args[0]
+    assert "Failed to cast" in err_msg
+    assert "int" in err_msg
+    assert "AN_INTEGER" in err_msg
+    assert "982.1" in err_msg
 
 
 def test_int_default(env):
