@@ -10,7 +10,7 @@ def test_int_invalid(set_env, env):
     set_env({"AN_INTEGER": "982.1"})
     with pytest.raises(Exception) as exc_info:
         env.int("AN_INTEGER")
-    err_msg = exc_info.value.args[0]
+    err_msg = str(exc_info.value)
     assert "Failed to cast" in err_msg
     assert "int" in err_msg
     assert "AN_INTEGER" in err_msg
