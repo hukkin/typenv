@@ -42,7 +42,7 @@ def test_upper_casing(set_env):
     assert Env(upper=True).int("aN_iNtEgEr") == 982
 
 
-def test_validators_single(set_env, env: Env):
+def test_validators_that_return(set_env, env: Env):
     def is_positive(val):
         return val > 0
 
@@ -58,6 +58,22 @@ def test_validators_single(set_env, env: Env):
         env.int("AN_INTEGER", validate=is_negative)
     with pytest.raises(Exception):
         env.int("AN_INTEGER", validate=(is_positive, is_negative))
+
+
+def test_validators_that_raise(set_env, env: Env):
+    def is_positive(val):
+        if val <= 0:
+            raise Exception("Number is not positive")
+
+    set_env({"A_FLOAT": "982.1"})
+    assert env.float("A_FLOAT", validate=is_positive) == 982.1
+
+    set_env({"A_FLOAT": "-0.2"})
+    with pytest.raises(Exception) as exc_info:
+        env.float("A_FLOAT", validate=is_positive)
+    assert "Value did not pass custom validator" in str(exc_info.value)
+    assert "A_FLOAT" in str(exc_info.value)
+    assert str(exc_info.value.__cause__) == "Number is not positive"
 
 
 def test_prefix(set_env, env: Env):
