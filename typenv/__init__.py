@@ -362,12 +362,17 @@ class Env:
     def _validate(name: _Str, value: Any, validators: Union[Callable, Iterable[Callable]]) -> None:
         if callable(validators):
             validators = (validators,)
+
+        exc_to_raise = Exception(
+            f'Invalid value for "{name}": Value did not pass custom validator'
+        )
         for validator in validators:
-            validator_result = validator(value)
+            try:
+                validator_result = validator(value)
+            except Exception as e:
+                raise exc_to_raise from e
             if validator_result is False:
-                raise Exception(
-                    f'Invalid value for "{name}": A value did not pass custom validation'
-                )
+                raise exc_to_raise
 
     def _validate_name(self, name: _Str) -> None:
         if not name:
