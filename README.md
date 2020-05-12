@@ -77,7 +77,32 @@ TODO:
 TODO:
 
 ### Validation
-TODO:
+```bash
+export NAME='Harry Potter'
+export AGE=14
+```
+```python
+from typenv import Env
+
+env = Env()
+
+# A single validator function
+NAME = env.str("NAME", validate=lambda n: n.startswith("Harry"))
+
+# A validator function can signal error by raising an exception
+def is_positive(num):
+    if num <= 0:
+        raise Exception("Number is not positive")
+
+# A validator function can alternatively return `False` to signal an error
+def is_less_than_thousand(num):
+    if num >= 1000:
+        return False
+    return True
+
+# Multiple validator functions can be passed as an iterable of callables
+AGE = env.int("AGE", validate=(is_positive, is_less_than_thousand))
+```
 
 ### Reading from a `.env` file
 TODO:
