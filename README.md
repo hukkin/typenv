@@ -68,13 +68,24 @@ The types supported by typenv are:
     * Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
 
 ### Default values
-TODO:
+TODO: document here
 
 ### Name prefixes
-TODO:
+TODO: document here
 
 ### Name uppercasing
-TODO:
+```bash
+export UPPER_CASE_NAME=true
+```
+```python
+from typenv import Env
+
+# Environment variable names in type cast methods will automatically be upper
+# cased when `upper=True` is set here.
+env = Env(upper=True)
+
+NAME = env.bool("upper_casE_Name", validate=lambda n: n.startswith("Harry"))
+```
 
 ### Validation
 ```bash
@@ -105,10 +116,10 @@ AGE = env.int("AGE", validate=(is_positive, is_less_than_thousand))
 ```
 
 ### Reading from a `.env` file
-TODO:
+TODO: document here
 
 ### Dumping parsed values
-TODO:
+TODO: document here
 
 ## Acknowledgments
 The public API of this library is almost an exact copy of [environs](https://github.com/sloria/environs), which is based on [envparse](https://github.com/rconradharris/envparse) and [django-environ](https://github.com/joke2k/django-environ). Credit for the interface goes to the authors of those libraries.
