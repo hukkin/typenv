@@ -68,7 +68,16 @@ The types supported by typenv are:
     * Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
 
 ### Default values
-TODO: document here
+Normally, if an environment variable is not found, typenv raises an exception. If a default value is provided, however, that will be returned instead of raising.
+```python
+from typenv import Env
+
+env = Env()
+
+BOOL = env.bool("NON_EXISTING_NAME", default=False)  # => False
+LIST = env.bool("NON_EXISTING_NAME", default=["a", "b"])  # => ["a", "b"]
+OPTIONAL_INT = env.int("NON_EXISTING_NAME", default=None)  # => None
+```
 
 ### Name prefixes
 TODO: document here
