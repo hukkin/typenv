@@ -73,6 +73,16 @@ TODO: document here
 ### Name prefixes
 TODO: document here
 
+### Name character set
+Typenv validates environment variable names. By default, the set of allowed characters includes upper case ASCII letters, digits and the underscore (`_`).
+
+The set of allowed characters can be configured:
+```python
+from typenv import Env
+
+env = Env(allowed_chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+```
+
 ### Name uppercasing
 ```bash
 export UPPER_CASE_NAME=true
@@ -84,7 +94,7 @@ from typenv import Env
 # cased when `upper=True` is set here.
 env = Env(upper=True)
 
-NAME = env.bool("upper_casE_Name", validate=lambda n: n.startswith("Harry"))
+NAME = env.bool("upper_casE_Name")
 ```
 
 ### Validation
