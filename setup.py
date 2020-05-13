@@ -4,7 +4,16 @@ from setuptools import setup
 
 EXTRAS_REQUIRE = {
     "tests": ["pytest", "pytest-randomly", "pytest-cov", "pytest-mock"],
-    "lint": ["isort", "black", "flake8", "flake8-bugbear", "mypy", "docformatter", "pre-commit"],
+    "lint": [
+        "isort",
+        "black",
+        "flake8",
+        "flake8-bugbear",
+        "flake8-comprehensions",
+        "mypy",
+        "docformatter",
+        "pre-commit",
+    ],
     "tools": ["codecov", "bump2version"],
 }
 EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["lint"] + EXTRAS_REQUIRE["tools"]
