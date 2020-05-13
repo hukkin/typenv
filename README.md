@@ -75,7 +75,7 @@ from typenv import Env
 env = Env()
 
 BOOL = env.bool("NON_EXISTING_NAME", default=False)  # => False
-LIST = env.bool("NON_EXISTING_NAME", default=["a", "b"])  # => ["a", "b"]
+LIST = env.list("NON_EXISTING_NAME", default=["a", "b"])  # => ["a", "b"]
 OPTIONAL_INT = env.int("NON_EXISTING_NAME", default=None)  # => None
 ```
 
