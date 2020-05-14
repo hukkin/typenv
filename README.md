@@ -5,7 +5,7 @@
 # typenv
 
 <!--- Don't edit the version line below manually. Let bump2version do it for you. -->
-> Version 0.1.3
+> Version 0.1.4
 
 > Typed environment variable parsing for Python
 
