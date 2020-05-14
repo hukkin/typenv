@@ -11,7 +11,7 @@ jobs:
     - python: 'nightly'
 install:
   - pip install "poetry==1.0.5"
-  - poetry install
+  - poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 script:
   # Static checks (only in Python 3.6 job)
   - |
