@@ -49,7 +49,6 @@ docformatter = "*"
 
 # Tools
 pre-commit = "*"
-codecov = "*"
 bump2version = "*"
 
 
