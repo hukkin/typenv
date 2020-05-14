@@ -36,7 +36,6 @@ setup(
     project_urls={"Changelog": "https://github.com/hukkinj1/typenv/blob/master/CHANGELOG.md"},
     packages=["typenv"],
     package_data={"typenv": ["py.typed"]},
-    zip_safe=False,  # For mypy to be able to find the installed package
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     install_requires=["python-dotenv>=0.10.3,<0.14.0"],
