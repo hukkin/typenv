@@ -348,7 +348,7 @@ class Env:
         return env_example
 
     def dump(self) -> Dict[_Str, ParsedValue]:
-        return self._parsed
+        return self._parsed.copy()
 
     def _preprocess_name(self, name: _Str) -> _Str:
         name = "".join(self.prefix) + name
