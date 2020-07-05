@@ -29,7 +29,7 @@ include = ["typenv/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-python-dotenv = ">=0.10.3, <0.14.0"
+python-dotenv = ">=0.10.3, <0.15.0"
 
 [tool.poetry.dev-dependencies]
 # Tests
@@ -75,6 +75,7 @@ exclude = '''
                      # the root of the project
 )
 '''
+
 
 [tool.isort]
 skip = ["venv"]
