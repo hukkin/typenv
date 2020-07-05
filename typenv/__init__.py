@@ -377,7 +377,7 @@ class Env:
     def _validate_name(self, name: _Str) -> None:
         if not name:
             raise ValueError(
-                f'Invalid name "{name}": Environment variable name can not be an empty string'
+                'Invalid name "": Environment variable name can not be an empty string'
             )
         if any(c not in self._allowed_chars for c in name):
             raise ValueError(
