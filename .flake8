@@ -1,6 +1,7 @@
 [flake8]
 max-line-length = 99
 max-complexity = 10
-# These checks violate PEP8 so let's ignore them
-extend-ignore = E203
+extend-ignore =
+    E203,  # E203: Whitespace before ':' (violates PEP8 and black style)
+    A003,  # A003: class attribute is shadowing a python builtin (we violate this on purpose a lot)
 extend-exclude = */site-packages/*
