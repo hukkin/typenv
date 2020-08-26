@@ -77,7 +77,7 @@ _typecast_map: Mapping[str, Callable] = {
 
 class Env:
     def __init__(
-        self, *, allowed_chars: Iterable[_Str] = _DEFAULT_NAME_CHARS, upper: _Bool = False,
+        self, *, allowed_chars: Iterable[_Str] = _DEFAULT_NAME_CHARS, upper: _Bool = False
     ):
         self._allowed_chars = allowed_chars
         self._upper = upper
