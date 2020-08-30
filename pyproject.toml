@@ -1,6 +1,6 @@
 [build-system]
-requires = ["poetry>=1.0.9"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry]
@@ -33,7 +33,7 @@ python-dotenv = ">=0.10.3, <0.15.0"
 
 [tool.poetry.dev-dependencies]
 # Tests
-pytest = ">=6.0.0rc1"
+pytest = "*"
 pytest-randomly = "*"
 pytest-cov = "*"
 pytest-mock = "*"
@@ -94,5 +94,5 @@ line_length = 99
 
 
 [tool.pytest.ini_options]
-addopts = "--strict-markers"
+addopts = "--strict-markers --strict-config"
 xfail_strict = true
