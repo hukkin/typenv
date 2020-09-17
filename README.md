@@ -147,11 +147,13 @@ def is_positive(num):
     if num <= 0:
         raise Exception("Number is not positive")
 
+
 # A validator function can alternatively return `False` to signal an error
 def is_less_than_thousand(num):
     if num >= 1000:
         return False
     return True
+
 
 # Multiple validator functions can be passed as an iterable of callables
 AGE = env.int("AGE", validate=(is_positive, is_less_than_thousand))
