@@ -27,9 +27,9 @@ There are a few reasons why typenv might be preferred:
 
 Installing from PyPI repository (https://pypi.org/project/typenv):
 
-~~~bash
+```bash
 pip install typenv
-~~~
+```
 
 ## Usage
 
@@ -37,7 +37,7 @@ pip install typenv
 
 Set environment variables:
 
-~~~bash
+```bash
 export NAME='Harry Potter'
 export AGE=14
 export IS_WIZARD=true
@@ -45,11 +45,11 @@ export PATRONUM_SUCCESS_RATE=0.92
 export BANK_BALANCE=134599.01
 export LUCKY_NUMBERS=7,3,11
 export EXTRA_DETAILS='{"friends": ["Hermione", "Ron"]}'
-~~~
+```
 
 Parse the values in Python:
 
-~~~python
+```python
 from typenv import Env
 
 env = Env()
@@ -64,7 +64,7 @@ EXTRA_DETAILS = env.json("EXTRA_DETAILS")  # => {"friends": ["Hermione", "Ron"]}
 
 # Optional settings must have a default value
 IS_DEATH_EATER = env.bool("IS_DEATH_EATER", default=False)  # => False
-~~~
+```
 
 ### Supported types
 
@@ -84,7 +84,7 @@ The types supported by typenv are:
 Normally, if an environment variable is not found, typenv raises an exception.
 If a default value is provided, however, that will be returned instead of raising.
 
-~~~python
+```python
 from typenv import Env
 
 env = Env()
@@ -92,7 +92,7 @@ env = Env()
 BOOL = env.bool("NON_EXISTING_NAME", default=False)  # => False
 LIST = env.list("NON_EXISTING_NAME", default=["a", "b"])  # => ["a", "b"]
 OPTIONAL_INT = env.int("NON_EXISTING_NAME", default=None)  # => None
-~~~
+```
 
 ### Name prefixes
 
@@ -105,19 +105,19 @@ By default, the set of allowed characters includes upper case ASCII letters, dig
 
 The set of allowed characters can be configured:
 
-~~~python
+```python
 from typenv import Env
 
 env = Env(allowed_chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-~~~
+```
 
 ### Name uppercasing
 
-~~~bash
+```bash
 export UPPER_CASE_NAME=true
-~~~
+```
 
-~~~python
+```python
 from typenv import Env
 
 # Environment variable names in type cast methods will automatically be upper
@@ -125,16 +125,16 @@ from typenv import Env
 env = Env(upper=True)
 
 NAME = env.bool("upper_casE_Name")
-~~~
+```
 
 ### Validation
 
-~~~bash
+```bash
 export NAME='Harry Potter'
 export AGE=14
-~~~
+```
 
-~~~python
+```python
 from typenv import Env
 
 env = Env()
@@ -157,7 +157,7 @@ def is_less_than_thousand(num):
 
 # Multiple validator functions can be passed as an iterable of callables
 AGE = env.int("AGE", validate=(is_positive, is_less_than_thousand))
-~~~
+```
 
 ### Reading from a `.env` file
 
