@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/hukkinj1/typenv.svg?branch=master)](<https://travis-ci.com/hukkinj1/typenv>)
 [![codecov.io](https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg)](<https://codecov.io/gh/hukkinj1/typenv>)
-[![PyPI version](https://badge.fury.io/py/typenv.svg)](<https://badge.fury.io/py/typenv>)
+[![PyPI version](https://img.shields.io/pypi/v/typenv)](<https://pypi.org/project/typenv>)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](<https://github.com/psf/black>)
 
 # typenv
