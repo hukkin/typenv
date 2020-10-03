@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.com/hukkinj1/typenv.svg?branch=master)](<https://travis-ci.com/hukkinj1/typenv>)
-[![codecov.io](https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg)](<https://codecov.io/gh/hukkinj1/typenv>)
-[![PyPI version](https://img.shields.io/pypi/v/typenv)](<https://pypi.org/project/typenv>)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](<https://github.com/psf/black>)
+[![Build Status](<https://travis-ci.com/hukkinj1/typenv.svg?branch=master>)](<https://travis-ci.com/hukkinj1/typenv>)
+[![codecov.io](<https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg>)](<https://codecov.io/gh/hukkinj1/typenv>)
+[![PyPI version](<https://img.shields.io/pypi/v/typenv>)](<https://pypi.org/project/typenv>)
+[![Code style: black](<https://img.shields.io/badge/code%20style-black-000000.svg>)](<https://github.com/psf/black>)
 
 # typenv
 
@@ -10,6 +10,24 @@
 > Version 0.1.4
 
 > Typed environment variable parsing for Python
+
+<!-- mdformat-toc start --maxlevel=6 --minlevel=2 -->
+
+- [Background](<#background>)
+- [Installing](<#installing>)
+- [Usage](<#usage>)
+  - [Basics](<#basics>)
+  - [Supported types](<#supported-types>)
+  - [Default values](<#default-values>)
+  - [Name prefixes](<#name-prefixes>)
+  - [Name character set](<#name-character-set>)
+  - [Name uppercasing](<#name-uppercasing>)
+  - [Validation](<#validation>)
+  - [Reading from a `.env` file](<#reading-from-a-env-file>)
+  - [Dumping parsed values](<#dumping-parsed-values>)
+- [Acknowledgments](<#acknowledgments>)
+
+<!-- mdformat-toc end -->
 
 ## Background
 
