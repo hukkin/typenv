@@ -11,6 +11,8 @@
 
 > Typed environment variable parsing for Python
 
+**Table of Contents**  *generated with [mdformat-toc](<https://github.com/hukkinj1/mdformat-toc>)*
+
 <!-- mdformat-toc start --maxlevel=6 --minlevel=2 -->
 
 - [Background](<#background>)
