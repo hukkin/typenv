@@ -16,7 +16,7 @@ repos:
   - id: python-use-type-annotations
   - id: python-check-blanket-noqa
 - repo: https://github.com/timothycrosley/isort
-  rev: 2e02c195afdb499be9068ca0d08c9d7d45912d4d  # frozen: 5.5.4
+  rev: 6bb47b7acc1554ecb59d2855e9110c447162f674  # frozen: 5.6.4
   hooks:
   - id: isort
 - repo: https://github.com/psf/black
@@ -24,7 +24,7 @@ repos:
   hooks:
   - id: black
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: d6e31aeb109d8ff85282c3fd632c89f8ea7b0dee  # frozen: v0.782
+  rev: f3bfcb5479b4fa73b3fbb95a6390420575f20b51  # frozen: v0.790
   hooks:
   - id: mypy
     args:

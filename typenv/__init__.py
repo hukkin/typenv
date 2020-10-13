@@ -23,7 +23,8 @@ import dotenv
 
 __version__ = "0.1.4"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
-# Make aliases for these types because typecast method names shadow the names
+# Make aliases for these types because typecast method names in `Env` class
+# shadow the names
 _Str = str
 _Int = int
 _Bool = bool
@@ -49,7 +50,7 @@ class ParsedValue(NamedTuple):
     optional: bool
 
 
-def _cast_bool(value: _Str) -> _Bool:
+def _cast_bool(value: str) -> bool:
     if value.lower() in {"true", "1"}:
         return True
     if value.lower() in {"false", "0"}:
@@ -57,7 +58,7 @@ def _cast_bool(value: _Str) -> _Bool:
     raise Exception(f'Failed to cast value "{value}" to bool')
 
 
-def _cast_list(value: _Str, subcast: Callable = _Str) -> List:
+def _cast_list(value: str, subcast: Callable = str) -> List:
     if value == "":
         return []
     return [subcast(item) for item in value.split(",")]
@@ -82,7 +83,7 @@ class Env:
         self._allowed_chars = allowed_chars
         self._upper = upper
         self.prefix: List[_Str] = []
-        self._parsed: Dict[str, ParsedValue] = {}
+        self._parsed: Dict[_Str, ParsedValue] = {}
 
     def _get_and_cast(
         self,
@@ -91,7 +92,7 @@ class Env:
         default: Union[Type[_Missing], None, _T],
         validate: Union[Callable, Iterable[Callable]],
         *,
-        typecast_kwds: Mapping[str, Any] = None,
+        typecast_kwds: Mapping[_Str, Any] = None,
     ) -> Optional[_T]:
         if typecast_kwds is None:
             typecast_kwds = {}
