@@ -21,7 +21,7 @@ from typing import (
 
 import dotenv
 
-__version__ = "0.1.4"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+__version__ = "0.1.5"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
 # Make aliases for these types because typecast method names in `Env` class
 # shadow the names
