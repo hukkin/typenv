@@ -45,7 +45,7 @@ repos:
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
-  rev: 01c43e0d023cff146d1fbb8eddb5d0d62b8787d3  # frozen: 0.3.3
+  rev: 515aea9b6a0132845c6068fd0440c35e38cfd269  # frozen: 0.3.4
   hooks:
   - id: mdformat
     additional_dependencies:

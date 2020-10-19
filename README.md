@@ -13,7 +13,7 @@
 
 **Table of Contents**  *generated with [mdformat-toc](<https://github.com/hukkinj1/mdformat-toc>)*
 
-<!-- mdformat-toc start --maxlevel=6 --minlevel=2 -->
+<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 
 - [Background](<#background>)
 - [Installing](<#installing>)
@@ -31,7 +31,7 @@
 
 <!-- mdformat-toc end -->
 
-## Background
+## Background<a name="background"></a>
 
 Typenv does environment variable parsing with an API almost identical to the excellent [environs](<https://github.com/sloria/environs>).
 There are a few reasons why typenv might be preferred:
@@ -43,7 +43,7 @@ There are a few reasons why typenv might be preferred:
 - Ability to generate a .env.example that shows expected types of environment variables.
 - Less dependencies. No [marshmallow](<https://github.com/marshmallow-code/marshmallow>) required.
 
-## Installing
+## Installing<a name="installing"></a>
 
 Installing from PyPI repository (https://pypi.org/project/typenv):
 
@@ -51,9 +51,9 @@ Installing from PyPI repository (https://pypi.org/project/typenv):
 pip install typenv
 ```
 
-## Usage
+## Usage<a name="usage"></a>
 
-### Basics
+### Basics<a name="basics"></a>
 
 Set environment variables:
 
@@ -86,7 +86,7 @@ EXTRA_DETAILS = env.json("EXTRA_DETAILS")  # => {"friends": ["Hermione", "Ron"]}
 IS_DEATH_EATER = env.bool("IS_DEATH_EATER", default=False)  # => False
 ```
 
-### Supported types
+### Supported types<a name="supported-types"></a>
 
 The types supported by typenv are:
 
@@ -99,7 +99,7 @@ The types supported by typenv are:
 * `env.list`
   * Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
 
-### Default values
+### Default values<a name="default-values"></a>
 
 Normally, if an environment variable is not found, typenv raises an exception.
 If a default value is provided, however, that will be returned instead of raising.
@@ -114,11 +114,11 @@ LIST = env.list("NON_EXISTING_NAME", default=["a", "b"])  # => ["a", "b"]
 OPTIONAL_INT = env.int("NON_EXISTING_NAME", default=None)  # => None
 ```
 
-### Name prefixes
+### Name prefixes<a name="name-prefixes"></a>
 
 TODO: document here
 
-### Name character set
+### Name character set<a name="name-character-set"></a>
 
 Typenv validates environment variable names.
 By default, the set of allowed characters includes upper case ASCII letters, digits and the underscore (`_`).
@@ -131,7 +131,7 @@ from typenv import Env
 env = Env(allowed_chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 ```
 
-### Name uppercasing
+### Name uppercasing<a name="name-uppercasing"></a>
 
 ```bash
 export UPPER_CASE_NAME=true
@@ -147,7 +147,7 @@ env = Env(upper=True)
 NAME = env.bool("upper_casE_Name")
 ```
 
-### Validation
+### Validation<a name="validation"></a>
 
 ```bash
 export NAME='Harry Potter'
@@ -179,15 +179,15 @@ def is_less_than_thousand(num):
 AGE = env.int("AGE", validate=(is_positive, is_less_than_thousand))
 ```
 
-### Reading from a `.env` file
+### Reading from a `.env` file<a name="reading-from-a-env-file"></a>
 
 TODO: document here
 
-### Dumping parsed values
+### Dumping parsed values<a name="dumping-parsed-values"></a>
 
 TODO: document here
 
-## Acknowledgments
+## Acknowledgments<a name="acknowledgments"></a>
 
 The public API of this library is almost an exact copy of [environs](<https://github.com/sloria/environs>),
 which is based on [envparse](<https://github.com/rconradharris/envparse>) and [django-environ](<https://github.com/joke2k/django-environ>).
