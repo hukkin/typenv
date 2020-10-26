@@ -92,7 +92,7 @@ class Env:
         default: Union[Type[_Missing], None, _T],
         validate: Union[Callable, Iterable[Callable]],
         *,
-        typecast_kwds: Mapping[_Str, Any] = None,
+        typecast_kwds: Optional[Mapping[_Str, Any]] = None,
     ) -> Optional[_T]:
         if typecast_kwds is None:
             typecast_kwds = {}

@@ -1,7 +1,7 @@
-[![Build Status](<https://travis-ci.com/hukkinj1/typenv.svg?branch=master>)](<https://travis-ci.com/hukkinj1/typenv>)
-[![codecov.io](<https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg>)](<https://codecov.io/gh/hukkinj1/typenv>)
-[![PyPI version](<https://img.shields.io/pypi/v/typenv>)](<https://pypi.org/project/typenv>)
-[![Code style: black](<https://img.shields.io/badge/code%20style-black-000000.svg>)](<https://github.com/psf/black>)
+[![Build Status](https://travis-ci.com/hukkinj1/typenv.svg?branch=master)](https://travis-ci.com/hukkinj1/typenv)
+[![codecov.io](https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkinj1/typenv)
+[![PyPI version](https://img.shields.io/pypi/v/typenv)](https://pypi.org/project/typenv)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # typenv
 
@@ -11,7 +11,7 @@
 
 > Typed environment variable parsing for Python
 
-**Table of Contents**  *generated with [mdformat-toc](<https://github.com/hukkinj1/mdformat-toc>)*
+**Table of Contents**  *generated with [mdformat-toc](https://github.com/hukkinj1/mdformat-toc)*
 
 <!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 
@@ -33,7 +33,7 @@
 
 ## Background<a name="background"></a>
 
-Typenv does environment variable parsing with an API almost identical to the excellent [environs](<https://github.com/sloria/environs>).
+Typenv does environment variable parsing with an API almost identical to the excellent [environs](https://github.com/sloria/environs).
 There are a few reasons why typenv might be preferred:
 
 - Type annotated typecast functions: type checkers are able to understand types of parsed environment variables.
@@ -41,7 +41,7 @@ There are a few reasons why typenv might be preferred:
 - Validation of environment variable names.
 - Optional automatic uppercasing of environment variable names.
 - Ability to generate a .env.example that shows expected types of environment variables.
-- Less dependencies. No [marshmallow](<https://github.com/marshmallow-code/marshmallow>) required.
+- Less dependencies. No [marshmallow](https://github.com/marshmallow-code/marshmallow) required.
 
 ## Installing<a name="installing"></a>
 
@@ -189,6 +189,6 @@ TODO: document here
 
 ## Acknowledgments<a name="acknowledgments"></a>
 
-The public API of this library is almost an exact copy of [environs](<https://github.com/sloria/environs>),
-which is based on [envparse](<https://github.com/rconradharris/envparse>) and [django-environ](<https://github.com/joke2k/django-environ>).
+The public API of this library is almost an exact copy of [environs](https://github.com/sloria/environs),
+which is based on [envparse](https://github.com/rconradharris/envparse) and [django-environ](https://github.com/joke2k/django-environ).
 Credit for the interface goes to the authors of those libraries.
