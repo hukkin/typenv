@@ -3,6 +3,7 @@ from decimal import Decimal as D
 import json
 import os
 import string
+from types import MappingProxyType
 import typing
 from typing import (
     Any,
@@ -22,6 +23,8 @@ from typing import (
 import dotenv
 
 __version__ = "0.1.5"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+
+_EMPTY_MAP: MappingProxyType = MappingProxyType({})
 
 # Make aliases for these types because typecast method names in `Env` class
 # shadow the names
@@ -92,11 +95,8 @@ class Env:
         default: Union[Type[_Missing], None, _T],
         validate: Union[Callable, Iterable[Callable]],
         *,
-        typecast_kwds: Optional[Mapping[_Str, Any]] = None,
+        typecast_kwds: Mapping[_Str, Any] = _EMPTY_MAP,
     ) -> Optional[_T]:
-        if typecast_kwds is None:
-            typecast_kwds = {}
-
         is_optional = default is not _Missing
 
         name = self._preprocess_name(name)

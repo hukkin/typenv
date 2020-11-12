@@ -90,14 +90,14 @@ IS_DEATH_EATER = env.bool("IS_DEATH_EATER", default=False)  # => False
 
 The types supported by typenv are:
 
-* `env.str`
-* `env.int`
-* `env.bool`
-* `env.float`
-* `env.decimal`
-* `env.json`
-* `env.list`
-  * Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
+- `env.str`
+- `env.int`
+- `env.bool`
+- `env.float`
+- `env.decimal`
+- `env.json`
+- `env.list`
+  - Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
 
 ### Default values<a name="default-values"></a>
 
