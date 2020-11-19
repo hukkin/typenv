@@ -17,29 +17,20 @@ repos:
   rev: e66be67b9b6811913470f70c28b4d50f94d05b22  # frozen: 20.8b1
   hooks:
   - id: black
-- repo: https://github.com/pre-commit/mirrors-mypy
-  rev: f3bfcb5479b4fa73b3fbb95a6390420575f20b51  # frozen: v0.790
-  hooks:
-  - id: mypy
-    args:
-    # Suppress errors resulting from no access to dependencies
-    - --ignore-missing-imports
-    - --no-warn-unused-ignores
-    # Allow multiple scripts (no .py postfix in name) to be checked in a single mypy invocation
-    - --scripts-are-modules
 - repo: https://gitlab.com/pycqa/flake8
   rev: bb6a530e28acab8d3551043b3e8709db8bcbac6b  # frozen: 3.8.4
   hooks:
   - id: flake8
     additional_dependencies:
     - flake8-bugbear
+    - flake8-builtins
     - flake8-comprehensions
 - repo: https://github.com/myint/docformatter
   rev: de0bf8fa254d25a01383fecdb6335bea01daeae3  # frozen: v1.3.1
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
-  rev: f5a4fdd37bc4a5cc5dc94ba6b258067ea860d109  # frozen: 0.5.1
+  rev: 164fba9cb747cbd37191a3ee921712886140dcd9  # frozen: 0.5.3
   hooks:
   - id: mdformat
     additional_dependencies:
