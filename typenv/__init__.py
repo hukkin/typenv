@@ -1,3 +1,5 @@
+__version__ = "0.1.5"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+
 import contextlib
 from decimal import Decimal as D
 import json
@@ -21,8 +23,6 @@ from typing import (
 )
 
 import dotenv
-
-__version__ = "0.1.5"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
 _EMPTY_MAP: MappingProxyType = MappingProxyType({})
 

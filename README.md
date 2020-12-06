@@ -184,7 +184,24 @@ TODO: document here
 
 ### Dumping parsed values<a name="dumping-parsed-values"></a>
 
-TODO: document here
+```bash
+export SOME_STR=blaablaa
+export SOME_INT=99
+```
+
+```python
+from typenv import Env, ParsedValue
+
+env = Env()
+
+SOME_STR = env.str("SOME_STR")
+SOME_INT = env.int("SOME_INT")
+
+assert env.dump() == {
+    "SOME_INT": ParsedValue(value=99, type="int", optional=False),
+    "SOME_STR": ParsedValue(value="blaablaa", type="str", optional=False),
+}
+```
 
 ## Acknowledgments<a name="acknowledgments"></a>
 
