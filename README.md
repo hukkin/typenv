@@ -97,6 +97,7 @@ The types supported by typenv are:
 - `env.json`
 - `env.list`
   - Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
+- `env.bytes`
 
 ### Default values<a name="default-values"></a>
 

@@ -5,6 +5,7 @@ from decimal import Decimal as D
 import json
 import os
 import string
+import sys
 from types import MappingProxyType
 import typing
 from typing import (
@@ -24,6 +25,12 @@ from typing import (
 
 import dotenv
 
+if sys.version_info < (3, 8):
+    from typing_extensions import Literal
+else:
+    from typing import Literal
+
+
 _EMPTY_MAP: MappingProxyType = MappingProxyType({})
 
 # Make aliases for these types because typecast method names in `Env` class
@@ -32,6 +39,7 @@ _Str = str
 _Int = int
 _Bool = bool
 _Float = float
+_Bytes = bytes
 
 _T = TypeVar("_T")
 _JSONType = Union[None, bool, int, float, str, list, dict]
@@ -67,6 +75,18 @@ def _cast_list(value: str, subcast: Callable = str) -> List:
     return [subcast(item) for item in value.split(",")]
 
 
+def _cast_bytes(value: str) -> bytes:
+    """Cast a string to bytes.
+
+    For now this only deals with hex encoded strings.
+    """
+    value = value.lower()
+    value = _removeprefix(value, "0x")
+    if len(value) % 2:
+        value = "0" + value
+    return bytes.fromhex(value)
+
+
 # Functions that cast a string to a type
 _typecast_map: Mapping[str, Callable] = {
     "bool": _cast_bool,
@@ -76,6 +96,7 @@ _typecast_map: Mapping[str, Callable] = {
     "json": json.loads,
     "list": _cast_list,
     "str": str,
+    "bytes": _cast_bytes,
 }
 
 
@@ -148,6 +169,38 @@ class Env:
         validate: Union[Callable, Iterable[Callable]] = (),
     ) -> Optional[_Str]:
         return self._get_and_cast(name, "str", default, validate)
+
+    @typing.overload
+    def bytes(
+        self,
+        name: _Str,
+        *,
+        encoding: Literal["hex"],
+        default: Union[Type[_Missing], _Bytes] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> _Bytes:
+        ...
+
+    @typing.overload
+    def bytes(
+        self,
+        name: _Str,
+        *,
+        encoding: Literal["hex"],
+        default: None,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> Optional[_Bytes]:
+        ...
+
+    def bytes(
+        self,
+        name: _Str,
+        *,
+        encoding: Literal["hex"],
+        default: Union[Type[_Missing], None, _Bytes] = _Missing,
+        validate: Union[Callable, Iterable[Callable]] = (),
+    ) -> Optional[_Bytes]:
+        return self._get_and_cast(name, "bytes", default, validate)
 
     @typing.overload
     def int(
@@ -388,3 +441,11 @@ class Env:
             raise ValueError(
                 f'Invalid name "{name}": Environment variable name can not start with a number'
             )
+
+
+# TODO: replace this with stdlib implementation once min Python version
+#       is 3.9
+def _removeprefix(string: str, prefix: str) -> str:
+    if prefix and string.startswith(prefix):
+        return string[len(prefix) :]
+    return string
