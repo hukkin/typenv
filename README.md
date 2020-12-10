@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/hukkinj1/typenv.svg?branch=master)](https://travis-ci.com/hukkinj1/typenv)
+[![Build Status](https://github.com/hukkinj1/typenv/workflows/Tests/badge.svg?branch=master)](https://github.com/hukkinj1/typenv/actions?query=workflow%3ATests+branch%3Amaster+event%3Apush)
 [![codecov.io](https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkinj1/typenv)
 [![PyPI version](https://img.shields.io/pypi/v/typenv)](https://pypi.org/project/typenv)
 
