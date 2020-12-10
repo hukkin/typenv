@@ -6,7 +6,7 @@
 
 <!--- Don't edit the version line below manually. Let bump2version do it for you. -->
 
-> Version 0.1.5
+> Version 0.1.6
 
 > Typed environment variable parsing for Python
 

@@ -1,4 +1,4 @@
-__version__ = "0.1.5"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+__version__ = "0.1.6"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
 import contextlib
 from decimal import Decimal as D
