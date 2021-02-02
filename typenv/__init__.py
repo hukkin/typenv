@@ -380,7 +380,7 @@ class Env:
     def read_env(path: _Str = ".env", override: _Bool = False) -> _Bool:
         """Load environment variables from a file.
 
-        If path is a file, load it to ENV. If not, recursively walk up
+        If `path` is a file, load it to ENV. If not, recursively walk up
         in dir tree and look for a file with that name, starting from
         current working directory. Return a bool representing whether a
         file was found.

@@ -64,6 +64,7 @@ export PATRONUM_SUCCESS_RATE=0.92
 export BANK_BALANCE=134599.01
 export LUCKY_NUMBERS=7,3,11
 export EXTRA_DETAILS='{"friends": ["Hermione", "Ron"]}'
+export FAVORITE_COLOR=0x7f0909
 ```
 
 Parse the values in Python:
@@ -80,6 +81,7 @@ PATRONUM_SUCCESS_RATE = env.float("PATRONUM_SUCCESS_RATE")  # => 0.92
 BANK_BALANCE = env.decimal("BANK_BALANCE")  # => decimal.Decimal("134599.01")
 LUCKY_NUMBERS = env.list("LUCKY_NUMBERS", subcast=int)  # => [7, 3, 11]
 EXTRA_DETAILS = env.json("EXTRA_DETAILS")  # => {"friends": ["Hermione", "Ron"]}
+FAVORITE_COLOR = env.bytes("FAVORITE_COLOR", encoding="hex")  # => b"\x7f\t\t"
 
 # Optional settings must have a default value
 IS_DEATH_EATER = env.bool("IS_DEATH_EATER", default=False)  # => False
@@ -94,10 +96,12 @@ The types supported by typenv are:
 - `env.bool`
 - `env.float`
 - `env.decimal`
-- `env.json`
 - `env.list`
-  - Takes a subcast argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
+  - Takes a `subcast` keyword argument for casting list items to one of `str`, `int` , `bool`, `float` or `decimal.Decimal`
+- `env.json`
 - `env.bytes`
+  - Takes an `encoding` keyword argument for indicating how the bytes are encoded.
+    For now only `hex` is supported.
 
 ### Default values<a name="default-values"></a>
 
@@ -181,7 +185,30 @@ AGE = env.int("AGE", validate=(is_positive, is_less_than_thousand))
 
 ### Reading from a `.env` file<a name="reading-from-a-env-file"></a>
 
-TODO: document here
+While developing, it is often useful to read environment variables from a file.
+Typenv supports this via the `Env.read_end()` method.
+The method will look for a file (by default) named `.env` in current working directory
+and import environment variables from it.
+If a file is not found,
+the method will walk up in the directory tree until a file is found or the root directory is reached.
+The method returns a boolean that is `True` if a file is found.
+
+Given a `.env` file in current working directory with the following content
+
+```sh
+SOME_VAR='some value'
+```
+
+The following code will be able to read and parse the value
+
+```python
+from typenv import Env
+
+env = Env()
+env.read_env()
+
+SOME_VAR = env.str("SOME_VAR")  # => "some value"
+```
 
 ### Dumping parsed values<a name="dumping-parsed-values"></a>
 
