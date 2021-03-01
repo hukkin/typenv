@@ -2,6 +2,11 @@
 
 This log should document all public API breaking changes.
 
+## **unreleased**
+
+- Removed
+  - Python 3.6 support
+
 ## 0.1.6
 
 - Added

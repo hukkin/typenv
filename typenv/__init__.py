@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 __version__ = "0.1.6"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
+from collections.abc import Callable, Generator, Iterable, Mapping
 import contextlib
 from decimal import Decimal as D
 import json
@@ -8,20 +11,7 @@ import string
 import sys
 from types import MappingProxyType
 import typing
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    Generator,
-    Iterable,
-    List,
-    Mapping,
-    NamedTuple,
-    Optional,
-    Type,
-    TypeVar,
-    Union,
-)
+from typing import Any, NamedTuple, TypeVar, Union
 
 import dotenv
 
@@ -34,14 +24,17 @@ else:
 _EMPTY_MAP: MappingProxyType = MappingProxyType({})
 
 # Make aliases for these types because typecast method names in `Env` class
-# shadow the names
+# shadow the names. Note that these aliases only need to be used within the
+# `Env` class scope
 _Str = str
 _Int = int
 _Bool = bool
 _Float = float
 _Bytes = bytes
+_List = list
 
 _T = TypeVar("_T")
+# TODO: Use the "|" operator when minimum Python version is 3.10
 _JSONType = Union[None, bool, int, float, str, list, dict]
 
 
@@ -69,7 +62,7 @@ def _cast_bool(value: str) -> bool:
     raise Exception(f'Failed to cast value "{value}" to bool')
 
 
-def _cast_list(value: str, subcast: Callable = str) -> List:
+def _cast_list(value: str, subcast: Callable = str) -> list:
     if value == "":
         return []
     return [subcast(item) for item in value.split(",")]
@@ -106,18 +99,18 @@ class Env:
     ):
         self._allowed_chars = allowed_chars
         self._upper = upper
-        self.prefix: List[_Str] = []
-        self._parsed: Dict[_Str, ParsedValue] = {}
+        self.prefix: _List[_Str] = []
+        self._parsed: dict[_Str, ParsedValue] = {}
 
     def _get_and_cast(
         self,
         name: _Str,
         cast_type: _Str,
-        default: Union[Type[_Missing], None, _T],
-        validate: Union[Callable, Iterable[Callable]],
+        default: type[_Missing] | None | _T,
+        validate: Callable | Iterable[Callable],
         *,
         typecast_kwds: Mapping[_Str, Any] = _EMPTY_MAP,
-    ) -> Optional[_T]:
+    ) -> _T | None:
         is_optional = default is not _Missing
 
         name = self._preprocess_name(name)
@@ -150,24 +143,24 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], _Str] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | _Str = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> _Str:
         ...
 
     @typing.overload
     def str(
-        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
-    ) -> Optional[_Str]:
+        self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
+    ) -> _Str | None:
         ...
 
     def str(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, _Str] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[_Str]:
+        default: type[_Missing] | None | _Str = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _Str | None:
         return self._get_and_cast(name, "str", default, validate)
 
     @typing.overload
@@ -176,8 +169,8 @@ class Env:
         name: _Str,
         *,
         encoding: Literal["hex"],
-        default: Union[Type[_Missing], _Bytes] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | _Bytes = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> _Bytes:
         ...
 
@@ -188,8 +181,8 @@ class Env:
         *,
         encoding: Literal["hex"],
         default: None,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[_Bytes]:
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _Bytes | None:
         ...
 
     def bytes(
@@ -197,9 +190,9 @@ class Env:
         name: _Str,
         *,
         encoding: Literal["hex"],
-        default: Union[Type[_Missing], None, _Bytes] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[_Bytes]:
+        default: type[_Missing] | None | _Bytes = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _Bytes | None:
         return self._get_and_cast(name, "bytes", default, validate)
 
     @typing.overload
@@ -207,24 +200,24 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], _Int] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | _Int = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> _Int:
         ...
 
     @typing.overload
     def int(
-        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
-    ) -> Optional[_Int]:
+        self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
+    ) -> _Int | None:
         ...
 
     def int(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, _Int] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[_Int]:
+        default: type[_Missing] | None | _Int = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _Int | None:
         return self._get_and_cast(name, "int", default, validate)
 
     @typing.overload
@@ -232,24 +225,24 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], _Bool] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | _Bool = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> _Bool:
         ...
 
     @typing.overload
     def bool(
-        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
-    ) -> Optional[_Bool]:
+        self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
+    ) -> _Bool | None:
         ...
 
     def bool(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, _Bool] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[_Bool]:
+        default: type[_Missing] | None | _Bool = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _Bool | None:
         return self._get_and_cast(name, "bool", default, validate)
 
     @typing.overload
@@ -257,24 +250,24 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], _Float] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | _Float = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> _Float:
         ...
 
     @typing.overload
     def float(
-        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
-    ) -> Optional[_Float]:
+        self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
+    ) -> _Float | None:
         ...
 
     def float(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, _Float] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[_Float]:
+        default: type[_Missing] | None | _Float = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _Float | None:
         return self._get_and_cast(name, "float", default, validate)
 
     @typing.overload
@@ -282,32 +275,32 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], D] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | D = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> D:
         ...
 
     @typing.overload
     def decimal(
-        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
-    ) -> Optional[D]:
+        self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
+    ) -> D | None:
         ...
 
     def decimal(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, D] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> Optional[D]:
+        default: type[_Missing] | None | D = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> D | None:
         return self._get_and_cast(name, "decimal", default, validate)
 
     def json(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, _JSONType] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | None | _JSONType = _Missing,
+        validate: Callable | Iterable[Callable] = (),
     ) -> Any:
         value = self._get_and_cast(name, "json", default, validate)
         # Extra validation: make sure user provided default serializes to json
@@ -319,15 +312,15 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], List] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
-    ) -> List[_Str]:
+        default: type[_Missing] | _List = _Missing,
+        validate: Callable | Iterable[Callable] = (),
+    ) -> _List[_Str]:
         ...
 
     @typing.overload
     def list(
-        self, name: _Str, *, default: None, validate: Union[Callable, Iterable[Callable]] = ()
-    ) -> Optional[List[_Str]]:
+        self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
+    ) -> _List[_Str] | None:
         ...
 
     @typing.overload
@@ -335,10 +328,10 @@ class Env:
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], List[_T]] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | _List[_T] = _Missing,
+        validate: Callable | Iterable[Callable] = (),
         subcast: Callable[..., _T],
-    ) -> List[_T]:
+    ) -> _List[_T]:
         ...
 
     @typing.overload
@@ -347,19 +340,19 @@ class Env:
         name: _Str,
         *,
         default: None,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        validate: Callable | Iterable[Callable] = (),
         subcast: Callable[..., _T],
-    ) -> Optional[List[_T]]:
+    ) -> _List[_T] | None:
         ...
 
     def list(
         self,
         name: _Str,
         *,
-        default: Union[Type[_Missing], None, List[_T]] = _Missing,
-        validate: Union[Callable, Iterable[Callable]] = (),
+        default: type[_Missing] | None | _List[_T] = _Missing,
+        validate: Callable | Iterable[Callable] = (),
         subcast: Callable = _Str,
-    ) -> Optional[List]:
+    ) -> _List | None:
         assert subcast in {_Str, _Int, _Bool, _Float, D}
         # Do lower() so that "Decimal" converts to "decimal"
         subcast_func = _typecast_map[subcast.__name__.lower()]
@@ -401,7 +394,7 @@ class Env:
             env_example += f"{k}={value_example}\n"
         return env_example
 
-    def dump(self) -> Dict[_Str, ParsedValue]:
+    def dump(self) -> dict[_Str, ParsedValue]:
         return self._parsed.copy()
 
     def _preprocess_name(self, name: _Str) -> _Str:
@@ -413,7 +406,7 @@ class Env:
         return name
 
     @staticmethod
-    def _validate(name: _Str, value: Any, validators: Union[Callable, Iterable[Callable]]) -> None:
+    def _validate(name: _Str, value: Any, validators: Callable | Iterable[Callable]) -> None:
         if callable(validators):
             validators = (validators,)
 
