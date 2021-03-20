@@ -60,6 +60,9 @@ category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
 
+[package.dependencies]
+toml = {version = "*", optional = true, markers = "extra == \"toml\""}
+
 [package.extras]
 toml = ["toml"]
 
@@ -352,7 +355,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "a10a6c3a67879772b490c96a8ad146ad52df0be6abe515a2962f46e7b29e34f0"
+content-hash = "7afed7bbc753032769922f183db0df6260594fba96b85d5c046decc14536502f"
 
 [metadata.files]
 appdirs = [

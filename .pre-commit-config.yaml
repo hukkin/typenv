@@ -18,7 +18,7 @@ repos:
   hooks:
   - id: black
 - repo: https://gitlab.com/pycqa/flake8
-  rev: bb6a530e28acab8d3551043b3e8709db8bcbac6b  # frozen: 3.8.4
+  rev: 56370aae451722f9d77a5ccd6fb6e231a4a8e651  # frozen: 3.9.0
   hooks:
   - id: flake8
     additional_dependencies:
@@ -30,7 +30,7 @@ repos:
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
-  rev: 6ca1e0160e2c6f39b32497a5dc9dbc83597c0f25  # frozen: 0.5.7
+  rev: 53980a1e7094a1da5aa947a5d62afdeb0a05be2c  # frozen: 0.6.1
   hooks:
   - id: mdformat
     additional_dependencies:
