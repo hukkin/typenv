@@ -120,7 +120,37 @@ OPTIONAL_INT = env.int("NON_EXISTING_NAME", default=None)  # => None
 
 ### Name prefixes<a name="name-prefixes"></a>
 
-TODO: document here
+```bash
+export FLASK_HOST=127.0.0.1
+export FLASK_PORT=44144
+```
+
+```python
+from typenv import Env
+
+env = Env()
+
+# Explicitly prefixing variable names works, but repeats itself
+# (especially given more environment variables and nested prefixes).
+HOST = env.str("FLASK_HOST")  # => "127.0.0.1"
+PORT = env.int("FLASK_PORT")  # => 44144
+
+# This reads the same variables as above, and can be a nice way of
+# reducing repetition and expressing structure. Note that it is possible
+# to have nested `with` statements.
+with env.prefixed("FLASK_"):
+    HOST = env.str("HOST")  # => "127.0.0.1"
+    PORT = env.int("PORT")  # => 44144
+
+# For more control, one can mutate `env.prefix` (of type list[str])
+# directly. Note that if an exception occurs reading the environment
+# variables, then `env.prefix` will not be reset to its initial value,
+# which is something that the `with` statement would take care of.
+env.prefix.append("FLASK_")
+HOST = env.str("HOST")  # => "127.0.0.1"
+PORT = env.int("PORT")  # => 44144
+env.prefix.pop()
+```
 
 ### Name character set<a name="name-character-set"></a>
 
