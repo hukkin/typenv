@@ -10,7 +10,7 @@ repos:
   - id: python-use-type-annotations
   - id: python-check-blanket-noqa
 - repo: https://github.com/timothycrosley/isort
-  rev: 473d150c1db60f4614a574e30993e9e0d3ca0cce  # frozen: 5.7.0
+  rev: a6222a8a125ec719724e628a5d3d0d5c60923281  # frozen: 5.8.0
   hooks:
   - id: isort
 - repo: https://github.com/psf/black
@@ -30,7 +30,7 @@ repos:
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
-  rev: 53980a1e7094a1da5aa947a5d62afdeb0a05be2c  # frozen: 0.6.1
+  rev: 1c872a8e40bd9a1cb5e3354d7f283581f506ee11  # frozen: 0.7.1
   hooks:
   - id: mdformat
     additional_dependencies:

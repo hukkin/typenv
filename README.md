@@ -14,19 +14,19 @@
 
 <!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 
-- [Background](<#background>)
-- [Installing](<#installing>)
-- [Usage](<#usage>)
-  - [Basics](<#basics>)
-  - [Supported types](<#supported-types>)
-  - [Default values](<#default-values>)
-  - [Name prefixes](<#name-prefixes>)
-  - [Name character set](<#name-character-set>)
-  - [Name uppercasing](<#name-uppercasing>)
-  - [Validation](<#validation>)
-  - [Reading from a `.env` file](<#reading-from-a-env-file>)
-  - [Dumping parsed values](<#dumping-parsed-values>)
-- [Acknowledgments](<#acknowledgments>)
+- [Background](#background)
+- [Installing](#installing)
+- [Usage](#usage)
+  - [Basics](#basics)
+  - [Supported types](#supported-types)
+  - [Default values](#default-values)
+  - [Name prefixes](#name-prefixes)
+  - [Name character set](#name-character-set)
+  - [Name uppercasing](#name-uppercasing)
+  - [Validation](#validation)
+  - [Reading from a `.env` file](#reading-from-a-env-file)
+  - [Dumping parsed values](#dumping-parsed-values)
+- [Acknowledgments](#acknowledgments)
 
 <!-- mdformat-toc end -->
 

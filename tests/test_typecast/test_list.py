@@ -9,5 +9,5 @@ def test_list_empty(set_env, env):
 
 
 def test_list_subcast_bool(set_env, env):
-    set_env({"BOOL_LIST": "1,false,true,FaLSE,0"})
+    set_env({"BOOL_LIST": "TRUE,false,true,FaLSE,FALSE"})
     assert env.list("BOOL_LIST", subcast=bool) == [True, False, True, False, False]

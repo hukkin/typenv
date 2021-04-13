@@ -55,9 +55,9 @@ class ParsedValue(NamedTuple):
 
 
 def _cast_bool(value: str) -> bool:
-    if value.lower() in {"true", "1"}:
+    if value.lower() == "true":
         return True
-    if value.lower() in {"false", "0"}:
+    if value.lower() == "false":
         return False
     raise Exception(f'Failed to cast value "{value}" to bool')
 

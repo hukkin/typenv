@@ -6,6 +6,7 @@ This log should document all public API breaking changes.
 
 - Removed
   - Python 3.6 support
+  - Support for "0" and "1" as valid bool values. Use "false" and "true".
 
 ## 0.1.6
 
