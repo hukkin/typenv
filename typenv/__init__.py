@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-__version__ = "0.1.6"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
+__version__ = "0.2.0"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
 
 from collections.abc import Callable, Generator, Iterable, Mapping
 import contextlib
