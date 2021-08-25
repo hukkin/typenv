@@ -15,7 +15,7 @@ from typing import Any, NamedTuple, TypeVar, Union
 
 import dotenv
 
-if sys.version_info < (3, 8):
+if sys.version_info < (3, 8):  # pragma: no cover
     from typing_extensions import Literal
 else:
     from typing import Literal

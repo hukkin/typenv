@@ -97,8 +97,12 @@ def test_prefixed(set_env, env: Env):
 
 
 def test_read_env(env: Env):
-    env.read_env("./tests/.env.test")
+    assert env.read_env("./tests/.env.test")
     assert env.str("A_STRING") == "blabla"
+
+
+def test_read_env__not_found(env: Env):
+    assert not env.read_env("this-path-should-not-exist.test")
 
 
 def test_dump_and_get_example(set_env, env: Env):
