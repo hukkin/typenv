@@ -77,10 +77,10 @@ omit = ["tests/*", "*/site-packages/*"]
 [tool.coverage.report]
 # Regexes for lines to exclude from consideration
 exclude_lines = [
-    # Have to re-enable the standard pragma
-    "pragma: no cover",
+    # Re-enable the standard pragma (with extra strictness)
+    '# pragma: no cover\b',
     # Ellipsis lines after @typing.overload
-    '\.\.\.'
+    '^ +\.\.\.$'
 ]
 
 
