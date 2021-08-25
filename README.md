@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/hukkinj1/typenv/workflows/Tests/badge.svg?branch=master)](https://github.com/hukkinj1/typenv/actions?query=workflow%3ATests+branch%3Amaster+event%3Apush)
-[![codecov.io](https://codecov.io/gh/hukkinj1/typenv/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkinj1/typenv)
+[![Build Status](https://github.com/hukkin/typenv/workflows/Tests/badge.svg?branch=master)](https://github.com/hukkin/typenv/actions?query=workflow%3ATests+branch%3Amaster+event%3Apush)
+[![codecov.io](https://codecov.io/gh/hukkin/typenv/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkin/typenv)
 [![PyPI version](https://img.shields.io/pypi/v/typenv)](https://pypi.org/project/typenv)
 
 # typenv
@@ -10,7 +10,7 @@
 
 > Typed environment variable parsing for Python
 
-**Table of Contents**  *generated with [mdformat-toc](https://github.com/hukkinj1/mdformat-toc)*
+**Table of Contents**  *generated with [mdformat-toc](https://github.com/hukkin/mdformat-toc)*
 
 <!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 

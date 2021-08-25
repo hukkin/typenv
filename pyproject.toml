@@ -6,9 +6,9 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "typenv"
 version = "0.2.0"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT
-authors = ["hukkinj1 <hukkinj1@users.noreply.github.com>"]
+authors = ["Taneli Hukkinen <hukkin@users.noreply.github.com>"]
 description = "Typed environment variable parsing for Python"
-repository = "https://github.com/hukkinj1/typenv"
+repository = "https://github.com/hukkin/typenv"
 readme = "README.md"
 license = "MIT"
 classifiers = [
@@ -25,7 +25,7 @@ packages = [
 include = ["typenv/py.typed"]
 
 [tool.poetry.urls]
-"Changelog" = "https://github.com/hukkinj1/typenv/blob/master/CHANGELOG.md"
+"Changelog" = "https://github.com/hukkin/typenv/blob/master/CHANGELOG.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
