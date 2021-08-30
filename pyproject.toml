@@ -69,7 +69,7 @@ xfail_strict = true
 source = ["src/", "*/site-packages/"]
 
 [tool.coverage.run]
-omit = ["tests/*"]
+source = ["typenv"]
 
 [tool.coverage.report]
 # Regexes for lines to exclude from consideration
