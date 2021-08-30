@@ -65,9 +65,11 @@ line_length = 99
 addopts = "--strict-markers --strict-config"
 xfail_strict = true
 
+[tool.coverage.paths]
+source = ["src/", "*/site-packages/"]
 
 [tool.coverage.run]
-omit = ["tests/*", "*/site-packages/*"]
+omit = ["tests/*"]
 
 [tool.coverage.report]
 # Regexes for lines to exclude from consideration
