@@ -36,3 +36,11 @@ repos:
     additional_dependencies:
     - mdformat-black
     - mdformat-toc
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: 44afb68a9695d04030edc5cdc5a4fc4f17e4f9e2  # frozen: v0.910
+  hooks:
+  - id: mypy
+    args: ["--scripts-are-modules"]
+    additional_dependencies:
+    - python-dotenv
+    - pytest
