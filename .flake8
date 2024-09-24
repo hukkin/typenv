@@ -2,6 +2,8 @@
 max-line-length = 99
 max-complexity = 10
 extend-ignore =
-    E203,  # E203: Whitespace before ':' (violates PEP8 and black style)
-    A003,  # A003: class attribute is shadowing a python builtin (we violate this on purpose a lot)
+    # E203: Whitespace before ':' (violates PEP8 and black style)
+    E203,
+    # A003: class attribute is shadowing a python builtin (we violate this on purpose a lot)
+    A003,
 extend-exclude = */site-packages/*
