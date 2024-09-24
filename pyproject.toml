@@ -10,10 +10,9 @@ authors = [
     { name = "Taneli Hukkinen", email = "hukkin@users.noreply.github.com" },
 ]
 license = { file = "LICENSE" }
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 dependencies = [
     "python-dotenv >=0.10.3",
-    "typing-extensions >=3.7.4; python_version < '3.8'",
 ]
 readme = "README.md"
 classifiers = [
@@ -21,10 +20,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
 ]

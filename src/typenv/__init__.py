@@ -8,17 +8,13 @@ from decimal import Decimal as D
 import json
 import os
 import string
-import sys
 from types import MappingProxyType
 import typing
 from typing import Any, NamedTuple, TypeVar, Union
 
 import dotenv
 
-if sys.version_info < (3, 8):  # pragma: no cover
-    from typing_extensions import Literal
-else:  # pragma: no cover
-    from typing import Literal
+from typing import Literal
 
 
 _EMPTY_MAP: MappingProxyType = MappingProxyType({})
@@ -73,8 +69,7 @@ def _cast_bytes(value: str) -> bytes:
 
     For now this only deals with hex encoded strings.
     """
-    value = value.lower()
-    value = _removeprefix(value, "0x")
+    value = value.lower().removeprefix("0x")
     if len(value) % 2:
         value = "0" + value
     return bytes.fromhex(value)
@@ -434,11 +429,3 @@ class Env:
             raise ValueError(
                 f'Invalid name "{name}": Environment variable name can not start with a number'
             )
-
-
-# TODO: replace this with stdlib implementation once min Python version
-#       is 3.9
-def _removeprefix(string: str, prefix: str) -> str:
-    if prefix and string.startswith(prefix):
-        return string[len(prefix) :]
-    return string
