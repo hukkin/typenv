@@ -54,9 +54,9 @@ def test_validators_that_return(set_env, env: Env):
     assert env.int("AN_INTEGER", validate=is_positive) == 982
     assert env.int("AN_INTEGER", validate=(is_positive, is_positive)) == 982
 
-    with pytest.raises(Exception):
+    with pytest.raises(Exception, match="AN_INTEGER"):
         env.int("AN_INTEGER", validate=is_negative)
-    with pytest.raises(Exception):
+    with pytest.raises(Exception, match="AN_INTEGER"):
         env.int("AN_INTEGER", validate=(is_positive, is_negative))
 
 
