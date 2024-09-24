@@ -10,12 +10,9 @@ import os
 import string
 from types import MappingProxyType
 import typing
-from typing import Any, NamedTuple, TypeVar, Union
+from typing import Any, Literal, NamedTuple, TypeVar, Union
 
 import dotenv
-
-from typing import Literal
-
 
 _EMPTY_MAP: MappingProxyType = MappingProxyType({})
 
@@ -140,14 +137,12 @@ class Env:
         *,
         default: type[_Missing] | _Str = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _Str:
-        ...
+    ) -> _Str: ...
 
     @typing.overload
     def str(
         self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
-    ) -> _Str | None:
-        ...
+    ) -> _Str | None: ...
 
     def str(
         self,
@@ -166,8 +161,7 @@ class Env:
         encoding: Literal["hex"],
         default: type[_Missing] | _Bytes = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _Bytes:
-        ...
+    ) -> _Bytes: ...
 
     @typing.overload
     def bytes(
@@ -177,8 +171,7 @@ class Env:
         encoding: Literal["hex"],
         default: None,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _Bytes | None:
-        ...
+    ) -> _Bytes | None: ...
 
     def bytes(
         self,
@@ -197,14 +190,12 @@ class Env:
         *,
         default: type[_Missing] | _Int = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _Int:
-        ...
+    ) -> _Int: ...
 
     @typing.overload
     def int(
         self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
-    ) -> _Int | None:
-        ...
+    ) -> _Int | None: ...
 
     def int(
         self,
@@ -222,14 +213,12 @@ class Env:
         *,
         default: type[_Missing] | _Bool = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _Bool:
-        ...
+    ) -> _Bool: ...
 
     @typing.overload
     def bool(
         self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
-    ) -> _Bool | None:
-        ...
+    ) -> _Bool | None: ...
 
     def bool(
         self,
@@ -247,14 +236,12 @@ class Env:
         *,
         default: type[_Missing] | _Float = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _Float:
-        ...
+    ) -> _Float: ...
 
     @typing.overload
     def float(
         self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
-    ) -> _Float | None:
-        ...
+    ) -> _Float | None: ...
 
     def float(
         self,
@@ -272,14 +259,12 @@ class Env:
         *,
         default: type[_Missing] | D = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> D:
-        ...
+    ) -> D: ...
 
     @typing.overload
     def decimal(
         self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
-    ) -> D | None:
-        ...
+    ) -> D | None: ...
 
     def decimal(
         self,
@@ -309,14 +294,12 @@ class Env:
         *,
         default: type[_Missing] | _List = _Missing,
         validate: Callable | Iterable[Callable] = (),
-    ) -> _List[_Str]:
-        ...
+    ) -> _List[_Str]: ...
 
     @typing.overload
     def list(
         self, name: _Str, *, default: None, validate: Callable | Iterable[Callable] = ()
-    ) -> _List[_Str] | None:
-        ...
+    ) -> _List[_Str] | None: ...
 
     @typing.overload
     def list(
@@ -326,8 +309,7 @@ class Env:
         default: type[_Missing] | _List[_T] = _Missing,
         validate: Callable | Iterable[Callable] = (),
         subcast: Callable[..., _T],
-    ) -> _List[_T]:
-        ...
+    ) -> _List[_T]: ...
 
     @typing.overload
     def list(
@@ -337,8 +319,7 @@ class Env:
         default: None,
         validate: Callable | Iterable[Callable] = (),
         subcast: Callable[..., _T],
-    ) -> _List[_T] | None:
-        ...
+    ) -> _List[_T] | None: ...
 
     def list(
         self,
