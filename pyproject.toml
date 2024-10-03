@@ -92,3 +92,13 @@ no_implicit_optional = true
 [[tool.mypy.overrides]]
 module = "tests.*"
 disallow_untyped_defs = false
+
+
+[tool.tox]
+requires = ["tox>=4.21.1"]
+env_list = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+[tool.tox.env_run_base]
+description = "Run tests under {base_python}"
+deps = ["-r tests/requirements.txt"]
+commands = [["pytest", { replace = "posargs", extend = true }]]
