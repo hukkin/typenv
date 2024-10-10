@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: 2c9f875913ee60ca25ce70243dc24d5b6415598c  # frozen: v4.6.0
+  rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
   hooks:
   - id: check-yaml
   - id: check-toml
@@ -14,7 +14,7 @@ repos:
   hooks:
   - id: isort
 - repo: https://github.com/psf/black
-  rev: b965c2a5026f8ba399283ba3e01898b012853c79  # frozen: 24.8.0
+  rev: 1b2427a2b785cc4aac97c19bb4b9a0de063f9547  # frozen: 24.10.0
   hooks:
   - id: black
 - repo: https://github.com/PyCQA/flake8
@@ -25,8 +25,8 @@ repos:
     - flake8-bugbear
     - flake8-builtins
     - flake8-comprehensions
-- repo: https://github.com/PyCQA/docformatter
-  rev: dfefe062799848234b4cd60b04aa633c0608025e  # frozen: v1.7.5
+- repo: https://github.com/hukkin/docformatter
+  rev: ab802050e6e96aaaf7f917fcbc333bb74e2e57f7  # frozen: v1.4.2
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
