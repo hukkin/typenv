@@ -25,8 +25,8 @@ repos:
     - flake8-bugbear
     - flake8-builtins
     - flake8-comprehensions
-- repo: https://github.com/PyCQA/docformatter
-  rev: dfefe062799848234b4cd60b04aa633c0608025e  # frozen: v1.7.5
+- repo: https://github.com/hukkin/docformatter
+  rev: 200485f4ca4a8c0baaee255a39e5cc9db9f4ddfe  # frozen: v1.4.1
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
