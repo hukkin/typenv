@@ -26,7 +26,7 @@ repos:
     - flake8-builtins
     - flake8-comprehensions
 - repo: https://github.com/hukkin/docformatter
-  rev: 200485f4ca4a8c0baaee255a39e5cc9db9f4ddfe  # frozen: v1.4.1
+  rev: ab802050e6e96aaaf7f917fcbc333bb74e2e57f7  # frozen: v1.4.2
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
