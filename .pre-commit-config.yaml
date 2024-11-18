@@ -30,14 +30,14 @@ repos:
   hooks:
   - id: docformatter
 - repo: https://github.com/executablebooks/mdformat
-  rev: 08fba30538869a440b5059de90af03e3502e35fb  # frozen: 0.7.17
+  rev: 00812cd1850e41aae5c0916645b4b7404f538e8c  # frozen: 0.7.19
   hooks:
   - id: mdformat
     additional_dependencies:
     - mdformat-black
     - mdformat-toc
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: d4911cfb7f1010759fde68da196036feeb25b99d  # frozen: v1.11.2
+  rev: f56614daa94d5cd733d3b7004c5df9caad267b4a  # frozen: v1.13.0
   hooks:
   - id: mypy
     args: ["--scripts-are-modules"]
