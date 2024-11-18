@@ -10,7 +10,7 @@
 
 > Typed environment variable parsing for Python
 
-**Table of Contents**  *generated with [mdformat-toc](https://github.com/hukkin/mdformat-toc)*
+**Table of Contents** *generated with [mdformat-toc](https://github.com/hukkin/mdformat-toc)*
 
 <!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 
